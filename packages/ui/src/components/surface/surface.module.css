@@ -12,6 +12,8 @@
   box-shadow: var(--bt-shadow);
 }
 .badge {
+  width: fit-content;
+  max-width: 100%;
   display: inline-flex;
   align-items: center;
   padding: 0.2rem 0.6rem;
@@ -67,6 +69,8 @@ h6.heading {
   color: var(--bt-text-muted);
 }
 .code {
+  width: fit-content;
+  max-width: 100%;
   background: var(--bt-surface-2);
   border-radius: 0.25rem;
   padding: 0.1rem 0.3rem;

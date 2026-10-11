@@ -1,0 +1,15 @@
+.block {
+  margin: 0;
+  padding: 1rem;
+  max-width: 100%;
+  overflow-x: auto;
+  background: var(--bt-surface-0);
+  color: var(--bt-text-default);
+  font: 0.8rem / 1.75 var(--bt-font-mono);
+  tab-size: 2;
+}
+
+.block:focus-visible {
+  outline: 2px solid var(--bt-link);
+  outline-offset: -2px;
+}

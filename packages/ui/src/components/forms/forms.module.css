@@ -69,6 +69,8 @@
   padding-inline-end: 2.75rem;
 }
 .comboButton {
+  display: grid;
+  place-items: center;
   position: absolute;
   inset-block: 1px;
   inset-inline-end: 1px;

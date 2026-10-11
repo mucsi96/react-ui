@@ -106,6 +106,7 @@ export default function OverviewPage() {
       </Demo>
       <Demo
         title="Design tokens"
+        language="css"
         description="The complete original --bt-* palette is preserved. Override any token in your own stylesheet."
         code={`:root {
   --bt-primary: hsl(280, 80%, 60%);

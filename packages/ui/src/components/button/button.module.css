@@ -31,8 +31,12 @@
   --button-bg: var(--bt-button-bg, var(--bt-error));
 }
 
-.button[data-hovered]:not([data-disabled]),
-.button[data-pressed]:not([data-disabled]) {
+.button:is(
+    [data-variant='filled'],
+    [data-variant='raised'],
+    [data-variant='fab'],
+    [data-variant='mini-fab']
+  ):is([data-hovered], [data-pressed]):not([data-disabled]) {
   background: oklch(from var(--button-bg) calc(l - 0.07) c h);
 }
 
@@ -71,9 +75,10 @@
   padding: 0.5rem;
 }
 
-.button[data-variant='outlined'][data-hovered]:not([data-disabled]),
-.button[data-variant='text'][data-hovered]:not([data-disabled]),
-.button[data-variant='icon'][data-hovered]:not([data-disabled]) {
+.button:is([data-variant='outlined'], [data-variant='text'], [data-variant='icon']):is(
+    [data-hovered],
+    [data-pressed]
+  ):not([data-disabled]) {
   background: color-mix(in srgb, var(--bt-text-default) 8%, transparent);
 }
 

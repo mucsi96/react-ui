@@ -2,6 +2,7 @@
   box-sizing: border-box;
 }
 html {
+  scroll-padding-block-start: 5.5rem;
   background: var(--bt-surface-0);
   scroll-behavior: smooth;
 }

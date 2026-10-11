@@ -36,6 +36,12 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 14
+      - uses: actions/upload-artifact@v7.0.2
+        if: always()
+        with:
+          name: gallery-screenshots
+          path: screenshots/gallery/
+          retention-days: 14
       - uses: actions/upload-pages-artifact@v5.0.0
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         with:

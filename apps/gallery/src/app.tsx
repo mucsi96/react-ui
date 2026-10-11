@@ -25,9 +25,15 @@ const OverviewPage = pages[0]!.component;
 export function App() {
   const location = useLocation();
   const main = useRef<HTMLElement>(null);
+  const activeLink = useRef<HTMLAnchorElement>(null);
   useEffect(() => {
     document.title = `${pages.find((page) => page.path === location.pathname)?.label ?? 'Not found'} — React UI`;
     window.scrollTo(0, 0);
+    activeLink.current?.scrollIntoView({
+      block: 'nearest',
+      inline: 'nearest',
+      behavior: 'instant',
+    });
     main.current?.focus();
   }, [location.pathname]);
 
@@ -63,6 +69,7 @@ export function App() {
           <nav aria-label="Component documentation" className={styles.navigation}>
             {pages.map((page) => (
               <NavLink
+                ref={location.pathname === page.path ? activeLink : undefined}
                 key={page.path}
                 to={page.path}
                 end

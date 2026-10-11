@@ -4,6 +4,7 @@ import { Button } from '../button/button';
 import type { ButtonProps } from '../button/button';
 import { Menu, MenuPopover } from '../menu/menu';
 import { classes } from '../../internal/classes';
+import { Icon } from '../../internal/icon';
 import styles from './split-button.module.css';
 
 export interface SplitButtonProps extends Omit<ButtonProps, 'children' | 'variant' | 'ref'> {
@@ -35,7 +36,7 @@ export function SplitButton({
           className={styles.trigger}
           aria-label={menuLabel}
         >
-          <span aria-hidden="true">⌄</span>
+          <Icon name="chevron-down" />
         </Button>
         <MenuPopover placement="bottom end">
           <Menu aria-label={menuLabel}>{children}</Menu>
