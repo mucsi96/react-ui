@@ -1,0 +1,33 @@
+:root {
+  color-scheme: dark;
+  --bt-surface-0: hsl(221, 39%, 11%);
+  --bt-surface-1: hsl(215, 28%, 17%);
+  --bt-surface-2: hsl(217, 19%, 27%);
+  --bt-surface-3: hsl(216, 17%, 27%);
+  --bt-surface-4: hsl(218, 18%, 27%);
+  --bt-outline: hsl(215, 14%, 34%);
+  --bt-text-strong: white;
+  --bt-text-default: hsl(220, 13%, 91%);
+  --bt-text-muted: hsl(218, 11%, 65%);
+  --bt-text-on-brand: white;
+  --bt-primary: hsl(220, 89%, 53%);
+  --bt-primary-hover: hsl(221, 79%, 48%);
+  --bt-link: hsl(218, 93%, 61%);
+  --bt-link-hint: hsl(217, 93%, 72%);
+  --bt-success: hsl(161, 92%, 25%);
+  --bt-success-hover: hsl(163, 93%, 22%);
+  --bt-success-soft: hsl(145, 78%, 68%);
+  --bt-success-on: hsl(145, 100%, 14%);
+  --bt-warn: hsl(42, 93%, 46%);
+  --bt-warn-hover: hsl(37, 97%, 39%);
+  --bt-warn-soft: hsl(56, 62%, 70%);
+  --bt-error: hsl(0, 75%, 51%);
+  --bt-error-hover: hsl(0, 74%, 45%);
+  --bt-error-soft: hsl(0, 96%, 77%);
+  --bt-error-on: hsl(0, 74%, 16%);
+  --bt-font: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --bt-font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+  --bt-radius: 0.5rem;
+  --bt-radius-lg: 0.75rem;
+  --bt-shadow: 0 8px 32px rgb(0 0 0 / 25%);
+}

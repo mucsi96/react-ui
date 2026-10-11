@@ -1,0 +1,82 @@
+.card {
+  box-sizing: border-box;
+  padding: 1.5rem;
+  border: 1px solid var(--bt-outline);
+  border-radius: var(--bt-radius-lg);
+  background: var(--bt-surface-1);
+  color: var(--bt-text-default);
+  font-family: var(--bt-font);
+}
+.card[data-variant='elevated'] {
+  border-color: transparent;
+  box-shadow: var(--bt-shadow);
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.6rem;
+  border-radius: 0.3rem;
+  background: var(--bt-surface-2);
+  color: var(--bt-text-default);
+  font: 600 0.75rem / 1.5 var(--bt-font);
+}
+.badge[data-tone='primary'] {
+  background: color-mix(in srgb, var(--bt-primary) 25%, transparent);
+  color: var(--bt-link-hint);
+}
+.badge[data-tone='success'] {
+  background: var(--bt-success-soft);
+  color: var(--bt-success-on);
+}
+.badge[data-tone='warn'] {
+  background: var(--bt-warn-soft);
+  color: var(--bt-surface-0);
+}
+.badge[data-tone='error'] {
+  background: var(--bt-error-soft);
+  color: var(--bt-error-on);
+}
+.heading {
+  color: var(--bt-text-strong);
+  font-family: var(--bt-font);
+  font-weight: 650;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  margin: 0;
+}
+h1.heading {
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+}
+h2.heading {
+  font-size: 1.5rem;
+}
+h3.heading {
+  font-size: 1.2rem;
+}
+h4.heading,
+h5.heading,
+h6.heading {
+  font-size: 1rem;
+}
+.text {
+  color: var(--bt-text-default);
+  font: 1rem / 1.7 var(--bt-font);
+  margin: 0;
+}
+.muted {
+  color: var(--bt-text-muted);
+}
+.code {
+  background: var(--bt-surface-2);
+  border-radius: 0.25rem;
+  padding: 0.1rem 0.3rem;
+  color: var(--bt-text-default);
+  font-family: var(--bt-font-mono);
+  font-size: 0.85em;
+}
+.divider {
+  border: 0;
+  height: 1px;
+  background: var(--bt-outline);
+  margin: 1rem 0;
+}

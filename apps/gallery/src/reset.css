@@ -1,0 +1,29 @@
+* {
+  box-sizing: border-box;
+}
+html {
+  background: var(--bt-surface-0);
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+  font-family: var(--bt-font);
+  color: var(--bt-text-default);
+}
+button,
+input,
+textarea {
+  font: inherit;
+}
+a {
+  color: var(--bt-link-hint);
+}
+::selection {
+  background: var(--bt-primary);
+  color: white;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

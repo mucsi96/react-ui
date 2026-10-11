@@ -1,0 +1,78 @@
+.slider {
+  position: relative;
+  display: inline-block;
+  width: var(--dial-size, 220px);
+  max-width: 100%;
+  outline: none;
+  user-select: none;
+  font-family: var(--bt-font);
+  container-type: inline-size;
+}
+.svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  touch-action: none;
+  cursor: grab;
+}
+.slider[data-dragging] .svg {
+  cursor: grabbing;
+}
+.slider[data-disabled] {
+  opacity: 0.55;
+}
+.slider[data-disabled] .svg {
+  cursor: not-allowed;
+}
+.track,
+.progress {
+  fill: none;
+  stroke-width: 28;
+}
+.track {
+  stroke: var(--bt-surface-2);
+}
+.progress {
+  stroke: var(--bt-primary);
+  stroke-linecap: round;
+}
+.handle {
+  fill: var(--bt-text-strong);
+  stroke: var(--bt-primary);
+  stroke-width: 2;
+}
+.slider:focus-visible .handle {
+  stroke: var(--bt-link-hint);
+  stroke-width: 4;
+}
+.readout {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  padding: 22%;
+  text-align: center;
+  pointer-events: none;
+}
+.label {
+  font-size: 6cqi;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--bt-text-muted);
+}
+.value {
+  font-size: 16cqi;
+  font-weight: 650;
+  color: var(--bt-text-strong);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+.unit {
+  margin-inline-start: 0.15em;
+  font-size: 0.55em;
+  font-weight: 500;
+  color: var(--bt-text-muted);
+}

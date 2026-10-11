@@ -1,0 +1,109 @@
+.hero {
+  display: grid;
+  justify-items: start;
+  gap: 1.5rem;
+  padding-block: 0.5rem 3rem;
+}
+.hero h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  line-height: 1.1;
+}
+.hero > p {
+  max-width: 40rem;
+  font-size: 1.1rem;
+}
+.accent {
+  color: var(--bt-link-hint);
+}
+.row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+.stack {
+  display: grid;
+  gap: 0.75rem;
+}
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1.2rem;
+  background: var(--bt-primary);
+  color: white;
+  text-decoration: none;
+  border-radius: var(--bt-radius);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+.cta:hover {
+  background: var(--bt-primary-hover);
+}
+.featureGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+.feature {
+  display: grid;
+  align-content: start;
+  gap: 1rem;
+}
+.feature > svg {
+  color: var(--bt-link-hint);
+}
+.feature > p {
+  font-size: 0.875rem;
+}
+.tokenGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  width: 100%;
+}
+.token {
+  display: grid;
+  gap: 0.5rem;
+}
+.token > span {
+  display: block;
+  height: 3.5rem;
+  border: 1px solid var(--bt-outline);
+  border-radius: var(--bt-radius);
+}
+.token > code {
+  font-size: 0.75rem;
+  background: none;
+  padding: 0;
+  overflow-wrap: anywhere;
+}
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+}
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+@media (max-width: 1100px) {
+  .featureGrid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 640px) {
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+  .tokenGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .hero > p {
+    font-size: 1rem;
+  }
+}
