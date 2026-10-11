@@ -78,9 +78,11 @@ GITHUB_PAGES=true npm run build
 GITHUB_PAGES=true npm run test:e2e
 ```
 
+GitHub Actions caches Playwright's Chromium binaries with the official `actions/cache` action. The key includes the runner OS/architecture and installed Playwright Core package version metadata, so unrelated dependency changes reuse the browser cache. Cache hits install only the Linux system dependencies; cache misses install both Chromium and those dependencies. Playwright notes that cache restore time can be similar to browser download time, so the cache reduces repeated downloads without guaranteeing a faster run. See [Playwright's caching guidance](https://playwright.dev/docs/ci#caching-browsers).
+
 ## Use the package locally
 
-The library is published as `@mucsi96/react-ui` by CI after successful verification on `main`. Its first automatic release requires the repository's `NPM_TOKEN` secret; see the [publishing setup](docs/publishing.md). After the first release:
+The library is published as `@mucsi96/react-ui`. Subsequent releases use npm trusted publishing from verified `main` builds, without an npm token stored in GitHub. See the [publishing setup](docs/publishing.md).
 
 ```bash
 npm install @mucsi96/react-ui
@@ -108,7 +110,7 @@ export function SaveAction() {
 }
 ```
 
-See the [package guide](packages/ui/README.md) for form, overlay, notification, table, and theming APIs. Releases use automatic `ui-*` version tags, the verified build artifact, and either the repository token or npm trusted publishing. Setup and recovery are documented in the [publishing guide](docs/publishing.md).
+See the [package guide](packages/ui/README.md) for form, overlay, notification, table, and theming APIs. Releases use automatic `ui-*` version tags, the verified build artifact, and npm trusted publishing. Setup and recovery are documented in the [publishing guide](docs/publishing.md).
 
 ## License
 

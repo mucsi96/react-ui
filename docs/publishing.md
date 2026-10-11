@@ -1,6 +1,6 @@
 # Automated npm publishing
 
-The `CI` workflow publishes `@mucsi96/react-ui` automatically after the verified production build and browser tests succeed on `main`. The first release uses this same pipeline; no local `npm publish` is required.
+The initial `@mucsi96/react-ui@0.1.0` release bootstraps the package from a verified tarball using an interactive npm login. Subsequent versions are published automatically by `CI` after the verified production build and browser tests succeed on `main`, using npm trusted publishing (OIDC).
 
 ## Versioning
 
@@ -10,18 +10,17 @@ CI stamps the version before building and testing. The publish job downloads the
 
 If publishing succeeded but GitHub release creation failed, rerun the workflow. It recognizes an identical already-published tarball by its SHA-512 integrity, skips duplicate publication, and completes the GitHub release. Registry authentication, rate-limit, and server failures are not treated as missing packages.
 
-## First release: repository token
+## Initial bootstrap
 
-1. On npmjs.com, create a **granular access token** under your `mucsi96` account.
-2. Set **Packages and scopes → Read and write (publish and stage)** and select the `@mucsi96` scope for creation of the initial package. Enable **Bypass two-factor authentication** for unattended CI publishing. Organization-management permissions are not needed.
-3. Add the token as the **`NPM_TOKEN` repository Actions secret** in [mucsi96/react-ui settings](https://github.com/mucsi96/react-ui/settings/secrets/actions).
-4. Merge the publishing workflow into `main`. Its successful verification run publishes the first version automatically. If the run failed because the secret was not configured yet, add it and rerun the failed job or dispatch `CI` on `main`.
+The package must exist before npm can authorize a trusted publisher. The initial release uses the `0.1.0` tarball built and verified by CI, with the npm account authenticated locally. npm may require a browser/passkey or one-time-password approval for that first publication.
 
-npm tokens are scoped to npm packages/scopes, not GitHub repositories. Once the package exists, a replacement token can be limited specifically to `@mucsi96/react-ui`. Keeping `NPM_TOKEN` as a repository secret makes it available only to workflows in this repository. The token is provided only to the main-branch publish step.
+Record that publication with a GitHub release tag `ui-1` targeting the commit that produced the tarball. This makes the next library release `0.2.0` rather than attempting to reuse `0.1.0`.
 
-## Subsequent releases: trusted publishing
+The first local publication is available on [npm](https://www.npmjs.com/package/@mucsi96/react-ui) and recorded by the [ui-1 release](https://github.com/mucsi96/react-ui/releases/tag/ui-1). The package README's npm badge and trusted-publishing documentation update are a real library-package change that allows the validation MR to exercise the `0.2.0` CI release.
 
-After the first CI release creates the package, you can replace the token with npm's GitHub Actions trusted publisher:
+## Trusted publishing
+
+Configure npm's GitHub Actions trusted publisher for the existing package:
 
 | npm setting          | Value                                       |
 | -------------------- | ------------------------------------------- |
@@ -32,7 +31,17 @@ After the first CI release creates the package, you can replace the token with n
 | Environment name     | Leave empty                                 |
 | Allowed action       | Enable direct publishing with `npm publish` |
 
-Configure this in the package's npm settings before your next library release, then remove the repository's `NPM_TOKEN` secret. The publish job already has `id-token: write` and uses a GitHub-hosted runner; npm exchanges its workflow identity automatically. No workflow change is needed to switch authentication methods. npm currently requires a newly configured trusted publisher to complete its first successful publication within two days, so that next library release should occur within that window.
+The equivalent terminal command is:
+
+```bash
+npm trust github @mucsi96/react-ui --repo mucsi96/react-ui --file ci.yml --allow-publish --yes
+```
+
+This command may require npm's interactive 2FA approval. Verify the configuration with `npm trust list @mucsi96/react-ui`.
+
+Enable **npm publish**, not only **npm stage publish**, in the npm website's permissions. The CI workflow performs direct publication; stage-only permission requires a separate promotion and does not authorize that command. A green verification run with a skipped publishing job does not validate the trusted publisher: an actual main-branch library release must complete.
+
+The publish job has `id-token: write`, uses a GitHub-hosted runner, and supplies no `NODE_AUTH_TOKEN`. npm exchanges the workflow identity automatically and generates provenance. No `NPM_TOKEN` repository secret is required. npm currently requires a newly configured trusted publisher to complete its first successful publication within two days, so configure it when the next library release is ready to merge.
 
 ## Recovering and checking a release
 

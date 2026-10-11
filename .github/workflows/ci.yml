@@ -44,16 +44,33 @@ jobs:
           RELEASE_VERSION: 0.${{ steps.version.outputs.version }}.0
         run: npm version "$RELEASE_VERSION" --workspace @mucsi96/react-ui --no-git-tag-version --allow-same-version
       - run: npm run check
-      - run: npx playwright install --with-deps chromium
+      - name: Restore Playwright browsers
+        id: playwright-cache
+        uses: actions/cache@v6.1.0
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('node_modules/playwright-core/package.json') }}
+      - name: Install Chromium and Linux dependencies
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: npx playwright install --with-deps chromium
+      - name: Install Linux dependencies for cached Chromium
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
+        run: npx playwright install-deps chromium
       - run: npm run test:e2e
       - name: Package verified library
         run: npm pack --workspace @mucsi96/react-ui
       - name: Validate publication candidate
+        id: publication-preview
         if: steps.version.outputs.hasNextVersion == 'true'
         env:
           RELEASE_VERSION: 0.${{ steps.version.outputs.version }}.0
           RELEASE_PACKAGE_DIR: .
         run: node scripts/check-release.ts
+      - name: Verify publish command
+        if: steps.version.outputs.hasNextVersion == 'true'
+        env:
+          PACKAGE_FILE: ${{ steps.publication-preview.outputs.package-file }}
+        run: npm publish "$PACKAGE_FILE" --dry-run --access public --ignore-scripts
       - uses: actions/upload-artifact@v7.0.2
         if: steps.version.outputs.hasNextVersion == 'true'
         with:
@@ -123,7 +140,6 @@ jobs:
       - name: Publish verified tarball
         if: steps.publication.outputs.should-publish == 'true'
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           PACKAGE_FILE: ${{ steps.publication.outputs.package-file }}
         run: npm publish "$PACKAGE_FILE" --access public --provenance --ignore-scripts
       - name: Create GitHub release

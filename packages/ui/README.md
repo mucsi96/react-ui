@@ -4,9 +4,11 @@ Accessible, dark-first React components with CSS Modules, TypeScript, and a cohe
 
 [Interactive gallery](https://mucsi96.github.io/react-ui/) · [Source](https://github.com/mucsi96/react-ui)
 
+[![npm version](https://img.shields.io/npm/v/@mucsi96/react-ui)](https://www.npmjs.com/package/@mucsi96/react-ui)
+
 ## Getting started
 
-Requires React and React DOM 19.3 or newer within React 19. The package is ESM and includes TypeScript declarations. Versions are released automatically from verified main-branch builds.
+Requires React and React DOM 19.3 or newer within React 19. The package is ESM and includes TypeScript declarations. After the initial release, versions are published automatically from verified main-branch builds using npm trusted publishing.
 
 ```bash
 npm install @mucsi96/react-ui
