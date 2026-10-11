@@ -38,8 +38,7 @@
   opacity: 0.5;
   cursor: not-allowed;
 }
-.item[data-has-submenu]::after {
-  content: '›';
+.submenuIcon {
   margin-inline-start: auto;
 }
 .separator {
@@ -47,4 +46,10 @@
   border: none;
   background: var(--bt-outline);
   margin: 0.35rem;
+}
+
+@media (max-width: 640px) {
+  .popover {
+    min-width: min(12rem, calc((100vw - 4rem) / 2));
+  }
 }

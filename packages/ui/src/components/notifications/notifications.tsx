@@ -10,6 +10,7 @@ import {
 import { createPortal } from 'react-dom';
 import type { HTMLAttributes, ReactNode } from 'react';
 import { classes } from '../../internal/classes';
+import { Icon } from '../../internal/icon';
 import styles from './notifications.module.css';
 
 export type NotificationTone = 'info' | 'success' | 'warn' | 'error';
@@ -101,7 +102,7 @@ function Toast({
         onClick={() => dismiss(notification.id)}
         aria-label="Dismiss notification"
       >
-        ×
+        <Icon name="close" />
       </button>
     </div>
   );

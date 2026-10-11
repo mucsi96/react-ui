@@ -1,6 +1,7 @@
 import { expect, test } from '@playwright/test';
 import type { Locator } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
+import { captureGallery } from './screenshots';
 
 const pages = [
   ['/', 'A clear foundation.'],
@@ -17,7 +18,7 @@ const pages = [
 for (const [path, title] of pages) {
   test(`${title} renders without accessibility violations or horizontal overflow`, async ({
     page,
-  }) => {
+  }, testInfo) => {
     const errors: string[] = [];
     page.on('pageerror', (error) => errors.push(error.message));
     await page.goto(`#${path}`);
@@ -27,8 +28,23 @@ for (const [path, title] of pages) {
       .analyze();
     expect(results.violations).toEqual([]);
     expect(
-      await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth),
+      (await page.evaluate(() => document.documentElement.scrollWidth)) <=
+        page.viewportSize()!.width,
     ).toBe(true);
+    expect(errors).toEqual([]);
+    await captureGallery(page, testInfo, path === '/' ? 'overview' : path.slice(1));
+    const examples = page.locator('details > summary');
+    const count = await examples.count();
+    for (const example of await examples.all()) await example.click();
+    await expect(page.locator('pre[data-language]')).toHaveCount(count);
+    expect(
+      (await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze())
+        .violations,
+    ).toEqual([]);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(
+      page.viewportSize()!.width,
+    );
+    await captureGallery(page, testInfo, `${path === '/' ? 'overview' : path.slice(1)}-examples`);
     expect(errors).toEqual([]);
   });
 }

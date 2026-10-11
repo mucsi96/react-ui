@@ -4,6 +4,7 @@ import { ModalOverlay, Modal, Dialog as AriaDialog, Heading } from 'react-aria-c
 import type { ModalOverlayProps } from 'react-aria-components';
 import { Button } from '../button/button';
 import { classes } from '../../internal/classes';
+import { Icon } from '../../internal/icon';
 import styles from './dialog.module.css';
 
 export { DialogTrigger } from 'react-aria-components';
@@ -41,7 +42,7 @@ export function Dialog({
                   {title}
                 </Heading>
                 <Button variant="icon" aria-label="Close dialog" onPress={close}>
-                  ×
+                  <Icon name="close" />
                 </Button>
               </header>
               {description && (

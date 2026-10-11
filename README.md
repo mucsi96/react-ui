@@ -4,7 +4,7 @@
 
 A dark-first, accessible React component library with a cohesive semantic palette and small, functional APIs.
 
-**[Explore the gallery](https://mucsi96.github.io/react-ui/)** · [Package documentation](packages/ui/README.md) · [Contributing](CONTRIBUTING.md)
+**[Explore the gallery](https://mucsi96.github.io/react-ui/)** · [Package documentation](packages/ui/README.md) · [Visual review](docs/visual-review/README.md) · [Contributing](CONTRIBUTING.md)
 
 ## The stack
 
@@ -63,11 +63,13 @@ npm run test:e2e                     # Tests the production gallery
 npm pack --dry-run -w @mucsi96/react-ui
 ```
 
-The browser suite checks every gallery page with axe, plus semantic button colors, disabled/focus behavior, keyboard menus, native form dialogs, combobox selection, pointer-driven multi-turn input, reduced motion, and responsive layouts. Visual evidence is attached to the Playwright report:
+The browser suite checks every gallery page with axe, plus semantic button colors, disabled/focus behavior, keyboard and pointer menus, native form dialogs, combobox selection, pointer-driven multi-turn input, reduced motion, and responsive layouts. It also captures every page with examples collapsed and expanded, plus open overlays and selected/validation states, on desktop and mobile. Screenshots are saved under `screenshots/gallery/{desktop,mobile}` and attached to the Playwright report; CI uploads them as `gallery-screenshots`. These are visual-review evidence, not pixel-diff baselines. View them alongside the report:
 
 ```bash
 npx playwright show-report
 ```
+
+Gallery code examples use Shiki's TSX and CSS grammars with the GitHub Dark theme. The highlighter loads when an example is expanded, uses the JavaScript regex engine, and renders escaped React text tokens.
 
 CI verifies and builds once, tests those production files, and deploys the same gallery artifact to GitHub Pages after successful checks. The hash-based gallery routes work on static hosting. To reproduce the Pages build locally:
 

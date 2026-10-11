@@ -1,4 +1,7 @@
 .container {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
   border: 1px solid var(--bt-outline);
   border-radius: var(--bt-radius-lg);
   overflow: hidden;
@@ -20,6 +23,11 @@
   font-weight: 600;
   font-size: 1rem;
   color: var(--bt-text-strong);
+}
+.captionText {
+  display: inline-block;
+  position: sticky;
+  inset-inline-start: 1.5rem;
 }
 .table th {
   background: var(--bt-surface-2);
@@ -44,11 +52,14 @@
 .table tbody tr:hover {
   background: var(--bt-surface-2);
 }
-.table tr[data-selected] {
+.table tbody tr[data-selected] {
   background: hsl(215, 44%, 28%);
   color: var(--bt-text-strong);
 }
 .sort {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   background: transparent;
   border: none;
   color: inherit;
@@ -73,6 +84,9 @@
   font-size: 0.8rem;
 }
 .empty {
+  margin: 0;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--bt-surface-2);
   text-align: center;
   color: var(--bt-text-muted);
 }

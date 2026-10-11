@@ -11,6 +11,7 @@ import type {
 } from 'react-aria-components';
 import type { ReactNode } from 'react';
 import { classes } from '../../internal/classes';
+import { Icon } from '../../internal/icon';
 import styles from './menu.module.css';
 
 export { MenuTrigger, SubmenuTrigger } from 'react-aria-components';
@@ -29,8 +30,22 @@ export interface MenuItemProps extends Omit<AriaMenuItemProps, 'className' | 'ch
   tone?: 'default' | 'error';
 }
 
-export function MenuItem({ className, tone = 'default', ...props }: MenuItemProps) {
-  return <AriaMenuItem {...props} className={classes(styles.item, className)} data-tone={tone} />;
+export function MenuItem({ className, tone = 'default', children, ...props }: MenuItemProps) {
+  return (
+    <AriaMenuItem
+      {...props}
+      textValue={props.textValue ?? (typeof children === 'string' ? children : undefined)}
+      className={classes(styles.item, className)}
+      data-tone={tone}
+    >
+      {({ hasSubmenu }) => (
+        <>
+          {children}
+          {hasSubmenu && <Icon name="chevron-right" className={styles.submenuIcon} />}
+        </>
+      )}
+    </AriaMenuItem>
+  );
 }
 
 export interface MenuPopoverProps extends Omit<PopoverProps, 'className'> {

@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useId, useState } from 'react';
 import type { Key, ReactNode } from 'react';
 import { Button } from '../button/button';
 import { classes } from '../../internal/classes';
+import { Icon } from '../../internal/icon';
 import styles from './data-table.module.css';
 
 export interface TableColumn<T> {
@@ -44,6 +45,7 @@ export function DataTable<T>({
 }: DataTableProps<T>) {
   const [sort, setSort] = useState<Sort | null>(null);
   const [page, setPage] = useState(0);
+  const emptyId = useId();
   const limit = Math.max(1, Math.trunc(pageSize));
   const pageCount = Math.max(1, Math.ceil(rows.length / limit));
   const currentPage = Math.min(page, pageCount - 1);
@@ -68,8 +70,13 @@ export function DataTable<T>({
   return (
     <div className={classes(styles.container, className)}>
       <div className={styles.scroll}>
-        <table className={styles.table}>
-          <caption className={styles.caption}>{caption}</caption>
+        <table
+          className={styles.table}
+          aria-describedby={visible.length === 0 ? emptyId : undefined}
+        >
+          <caption className={styles.caption}>
+            <span className={styles.captionText}>{caption}</span>
+          </caption>
           <thead>
             <tr>
               {onSelectionChange && (
@@ -93,13 +100,15 @@ export function DataTable<T>({
                   {column.compare ? (
                     <button className={styles.sort} onClick={() => toggleSort(column.id)}>
                       {column.label}
-                      <span aria-hidden="true">
-                        {sort?.column === column.id
-                          ? sort.direction === 'ascending'
-                            ? ' ↑'
-                            : ' ↓'
-                          : ' ↕'}
-                      </span>
+                      <Icon
+                        name={
+                          sort?.column === column.id
+                            ? sort.direction === 'ascending'
+                              ? 'arrow-up'
+                              : 'arrow-down'
+                            : 'sort'
+                        }
+                      />
                     </button>
                   ) : (
                     column.label
@@ -121,7 +130,7 @@ export function DataTable<T>({
                         aria-pressed={selectedKey === key}
                         onPress={() => onSelectionChange(selectedKey === key ? null : key)}
                       >
-                        <span aria-hidden="true">›</span>
+                        <Icon name="chevron-right" />
                       </Button>
                     </td>
                   )}
@@ -133,16 +142,14 @@ export function DataTable<T>({
                 </tr>
               );
             })}
-            {visible.length === 0 && (
-              <tr>
-                <td colSpan={columns.length + (onSelectionChange ? 1 : 0)} className={styles.empty}>
-                  {emptyMessage}
-                </td>
-              </tr>
-            )}
           </tbody>
         </table>
       </div>
+      {visible.length === 0 && (
+        <p id={emptyId} className={styles.empty}>
+          {emptyMessage}
+        </p>
+      )}
       <nav aria-label={`${caption} pagination`} className={styles.pagination}>
         <span>
           {rows.length === 0 ? 0 : currentPage * limit + 1}–
@@ -154,7 +161,7 @@ export function DataTable<T>({
           isDisabled={currentPage === 0}
           onPress={() => setPage(currentPage - 1)}
         >
-          ←
+          <Icon name="arrow-left" />
         </Button>
         <span>
           Page {currentPage + 1} of {pageCount}
@@ -165,7 +172,7 @@ export function DataTable<T>({
           isDisabled={currentPage === pageCount - 1}
           onPress={() => setPage(currentPage + 1)}
         >
-          →
+          <Icon name="arrow-right" />
         </Button>
       </nav>
     </div>

@@ -18,6 +18,7 @@ import type {
 } from 'react-aria-components';
 import type { ReactNode } from 'react';
 import { classes } from '../../internal/classes';
+import { Icon } from '../../internal/icon';
 import styles from './forms.module.css';
 
 export interface SelectOption {
@@ -59,7 +60,7 @@ export function Select({
       <Label className={styles.label}>{label}</Label>
       <Button className={styles.selectButton}>
         <SelectValue />
-        <span aria-hidden="true">⌄</span>
+        <Icon name="chevron-down" />
       </Button>
       {description && (
         <Text slot="description" className={styles.description}>
@@ -110,7 +111,7 @@ export function ComboBox({
       <Group className={styles.combo}>
         <Input className={styles.input} placeholder={placeholder} />
         <Button className={styles.comboButton} aria-label={`Show ${label.toLowerCase()} options`}>
-          ⌄
+          <Icon name="chevron-down" />
         </Button>
       </Group>
       {description && (

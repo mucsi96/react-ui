@@ -1,4 +1,4 @@
-import { Copy, Edit, MoreHorizontal, Trash2 } from 'lucide-react';
+import { ChevronDown, Copy, Edit, MoreHorizontal, Trash2 } from 'lucide-react';
 import {
   Button,
   Menu,
@@ -35,7 +35,7 @@ export default function MenusPage() {
       >
         <MenuTrigger>
           <Button>
-            Actions <span aria-hidden="true">⌄</span>
+            Actions <ChevronDown size={16} aria-hidden="true" />
           </Button>
           <MenuPopover>
             <Menu aria-label="Actions">

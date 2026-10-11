@@ -3,6 +3,7 @@
   "plugins": ["typescript", "react", "jsx-a11y", "import"],
   "categories": { "correctness": "error" },
   "rules": {
+    "jsx-a11y/no-noninteractive-tabindex": ["error", { "roles": ["tabpanel", "region"] }],
     "react/rules-of-hooks": "error",
     "react/exhaustive-deps": "error",
     "jsx-a11y/prefer-tag-over-role": "off"
