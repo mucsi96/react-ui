@@ -1,6 +1,6 @@
 import { createHash } from 'node:crypto';
 import { appendFile, readFile } from 'node:fs/promises';
-import { join } from 'node:path';
+import { resolve } from 'node:path';
 import { releaseDecision } from './release-decision.ts';
 
 const version = process.env.RELEASE_VERSION;
@@ -10,7 +10,7 @@ if (!version || !/^0\.[1-9]\d*\.0$/.test(version)) {
 const outputFile = process.env.GITHUB_OUTPUT;
 if (!outputFile) throw new Error('GITHUB_OUTPUT is required for the release workflow.');
 
-const packageFile = join(
+const packageFile = resolve(
   process.env.RELEASE_PACKAGE_DIR ?? 'release-package',
   `mucsi96-react-ui-${version}.tgz`,
 );
