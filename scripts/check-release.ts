@@ -10,7 +10,10 @@ if (!version || !/^0\.[1-9]\d*\.0$/.test(version)) {
 const outputFile = process.env.GITHUB_OUTPUT;
 if (!outputFile) throw new Error('GITHUB_OUTPUT is required for the release workflow.');
 
-const packageFile = join('release-package', `mucsi96-react-ui-${version}.tgz`);
+const packageFile = join(
+  process.env.RELEASE_PACKAGE_DIR ?? 'release-package',
+  `mucsi96-react-ui-${version}.tgz`,
+);
 const artifact = await readFile(packageFile);
 const integrity = `sha512-${createHash('sha512').update(artifact).digest('base64')}`;
 const response = await fetch(`https://registry.npmjs.org/@mucsi96%2freact-ui/${version}`, {
