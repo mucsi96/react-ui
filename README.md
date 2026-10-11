@@ -80,7 +80,13 @@ GITHUB_PAGES=true npm run test:e2e
 
 ## Use the package locally
 
-The library is prepared for npm publishing as `@mucsi96/react-ui`. Until its first npm release, create a tarball from this repository and install it into a React application:
+The library is published as `@mucsi96/react-ui` by CI after successful verification on `main`. Its first automatic release requires the repository's `NPM_TOKEN` secret; see the [publishing setup](docs/publishing.md). After the first release:
+
+```bash
+npm install @mucsi96/react-ui
+```
+
+To use a local build before the first release:
 
 ```bash
 npm run build:ui
@@ -102,7 +108,7 @@ export function SaveAction() {
 }
 ```
 
-See the [package guide](packages/ui/README.md) for form, overlay, notification, table, and theming APIs. Maintainers can publish a verified version with `npm publish -w @mucsi96/react-ui`; publishing credentials or trusted-publishing configuration belong to the npm account.
+See the [package guide](packages/ui/README.md) for form, overlay, notification, table, and theming APIs. Releases use automatic `ui-*` version tags, the verified build artifact, and either the repository token or npm trusted publishing. Setup and recovery are documented in the [publishing guide](docs/publishing.md).
 
 ## License
 

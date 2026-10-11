@@ -11,7 +11,7 @@ permissions:
 
 concurrency:
   group: ci-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
 jobs:
   verify:
@@ -19,17 +19,47 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GITHUB_PAGES: 'true'
+    outputs:
+      has-next-version: ${{ steps.version.outputs.hasNextVersion }}
+      next-version: ${{ steps.version.outputs.version }}
+      next-tag: ${{ steps.version.outputs.tag }}
     steps:
       - uses: actions/checkout@v7.0.1
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v7.1.0
         with:
           node-version-file: .node-version
           cache: npm
       - run: npm ci
+      - name: Determine library release
+        id: version
+        uses: mucsi96/get-next-version@main
+        with:
+          prefix: ui
+          src: packages/ui
+      - name: Stamp library version
+        if: steps.version.outputs.hasNextVersion == 'true'
+        env:
+          RELEASE_VERSION: 0.${{ steps.version.outputs.version }}.0
+        run: npm version "$RELEASE_VERSION" --workspace @mucsi96/react-ui --no-git-tag-version --allow-same-version
       - run: npm run check
       - run: npx playwright install --with-deps chromium
       - run: npm run test:e2e
-      - run: npm pack --dry-run -w @mucsi96/react-ui
+      - name: Package verified library
+        run: npm pack --workspace @mucsi96/react-ui
+      - name: Validate publication candidate
+        if: steps.version.outputs.hasNextVersion == 'true'
+        env:
+          RELEASE_VERSION: 0.${{ steps.version.outputs.version }}.0
+          RELEASE_PACKAGE_DIR: .
+        run: node scripts/check-release.ts
+      - uses: actions/upload-artifact@v7.0.2
+        if: steps.version.outputs.hasNextVersion == 'true'
+        with:
+          name: ui-package
+          path: mucsi96-react-ui-*.tgz
+          if-no-files-found: error
       - uses: actions/upload-artifact@v7.0.2
         if: always()
         with:
@@ -62,3 +92,44 @@ jobs:
       - uses: actions/configure-pages@v6.0.0
       - uses: actions/deploy-pages@v5.0.1
         id: deployment
+
+  publish:
+    name: Publish npm package
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && needs.verify.outputs.has-next-version == 'true'
+    needs: verify
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
+    env:
+      RELEASE_VERSION: 0.${{ needs.verify.outputs.next-version }}.0
+      RELEASE_TAG: ${{ needs.verify.outputs.next-tag }}
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version-file: .node-version
+          registry-url: https://registry.npmjs.org
+          package-manager-cache: false
+      - uses: actions/download-artifact@v8.0.2
+        with:
+          name: ui-package
+          path: release-package
+      - name: Check publication status
+        id: publication
+        run: node scripts/check-release.ts
+      - name: Publish verified tarball
+        if: steps.publication.outputs.should-publish == 'true'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          PACKAGE_FILE: ${{ steps.publication.outputs.package-file }}
+        run: npm publish "$PACKAGE_FILE" --access public --provenance --ignore-scripts
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if ! gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
+            gh release create "$RELEASE_TAG" --target "$GITHUB_SHA" --title "@mucsi96/react-ui $RELEASE_VERSION" --generate-notes
+          fi

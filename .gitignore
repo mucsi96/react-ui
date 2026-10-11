@@ -6,6 +6,7 @@ screenshots/
 coverage/
 *.tsbuildinfo
 *.tgz
+release-package/
 .env
 .env.*
 !.env.example
