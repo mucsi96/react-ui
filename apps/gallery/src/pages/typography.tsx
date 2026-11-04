@@ -28,6 +28,19 @@ export default function TypographyPage() {
         <Code>const ready = true;</Code>
       </Demo>
       <Demo
+        title="Application typography"
+        description="Opt in to typography.css to restore the Angular heading reset. Page-specific sizes remain in your CSS Modules."
+        code={`import '@mucsi96/react-ui/styles.css';
+import '@mucsi96/react-ui/typography.css';
+
+<h2>Unstyled section heading</h2>
+<h3>Unstyled card heading</h3>`}
+        stack
+      >
+        <h2>Unstyled section heading</h2>
+        <h3>Unstyled card heading</h3>
+      </Demo>
+      <Demo
         title="Cards and badges"
         code={`<Card variant="outlined">
   <Heading level={3}>Workspace</Heading>

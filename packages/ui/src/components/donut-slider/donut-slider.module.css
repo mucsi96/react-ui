@@ -18,7 +18,7 @@
 .slider[data-dragging] .svg {
   cursor: grabbing;
 }
-.slider[data-disabled] {
+.slider[data-disabled] .svg {
   opacity: 0.55;
 }
 .slider[data-disabled] .svg {
@@ -27,7 +27,6 @@
 .track,
 .progress {
   fill: none;
-  stroke-width: 28;
 }
 .track {
   stroke: var(--bt-surface-2);
@@ -42,8 +41,8 @@
   stroke-width: 2;
 }
 .slider:focus-visible .handle {
-  stroke: var(--bt-link-hint);
-  stroke-width: 4;
+  stroke: var(--bt-primary);
+  stroke-width: 3;
 }
 .readout {
   position: absolute;
@@ -52,7 +51,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.25rem;
+  gap: 0.125rem;
+  line-height: 1.1;
   padding: 22%;
   text-align: center;
   pointer-events: none;
@@ -65,7 +65,7 @@
 }
 .value {
   font-size: 16cqi;
-  font-weight: 650;
+  font-weight: 600;
   color: var(--bt-text-strong);
   font-variant-numeric: tabular-nums;
   line-height: 1.1;

@@ -76,6 +76,32 @@ export default function MenusPage() {
         </MenuTrigger>
       </Demo>
       <Demo
+        title="Profile menu"
+        description="The circular initials avatar matches the Angular application's profile trigger."
+        code={`<MenuTrigger>
+  <Button variant="avatar" aria-label="User menu">IB</Button>
+  <MenuPopover>
+    <Menu aria-label="User menu">
+      <MenuItem>Settings</MenuItem>
+    </Menu>
+  </MenuPopover>
+</MenuTrigger>`}
+      >
+        <MenuTrigger>
+          <Button variant="avatar" aria-label="User menu">
+            IB
+          </Button>
+          <MenuPopover>
+            <Menu aria-label="User menu">
+              <MenuItem onAction={() => notifications.info('Opened settings')}>Settings</MenuItem>
+            </Menu>
+          </MenuPopover>
+        </MenuTrigger>
+        <Button variant="avatar" aria-label="Disabled user menu" isDisabled>
+          IB
+        </Button>
+      </Demo>
+      <Demo
         title="Nested submenu"
         description="Submenus retain the same focus and dismissal behavior. Use Right Arrow to enter and Left Arrow to return."
         code={`<MenuTrigger>

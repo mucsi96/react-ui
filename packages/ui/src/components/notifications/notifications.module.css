@@ -9,7 +9,7 @@
   background: var(--bt-surface-2);
   color: var(--bt-text-strong);
   box-shadow: 0 0 20px rgb(0 0 0 / 12%);
-  font: 500 0.875rem / 1.6 var(--bt-font);
+  font: 500 1rem / normal var(--bt-font);
   overflow-wrap: anywhere;
 }
 .alert[data-tone='success'] {

@@ -27,6 +27,21 @@ export function SaveAction() {
 
 Components need no theme provider. The stylesheet defines the dark `--bt-*` tokens and `color-scheme` on `:root`; all component selectors and animations are locally scoped. It does not reset your application's typography or layout. The library entry is marked as a client boundary for React Server Component frameworks.
 
+For applications migrating from `@mucsi96/angular-material-theme`, opt in to the
+matching typography baseline before your application styles:
+
+```tsx
+import '@mucsi96/react-ui/styles.css';
+import '@mucsi96/react-ui/typography.css';
+import './styles.css';
+```
+
+This restores normal-weight, unscaled native headings with no default margins.
+Set page-specific heading sizes and spacing in your CSS Modules. `--bt-font`
+matches Angular Material's system-font stack; `--bt-font-body` matches Cooking's
+Apple/Roboto body stack. Bundle Roboto locally if your application uses that
+fallback. The optional stylesheet does not import fonts or reset page layouts.
+
 ## Buttons
 
 ```tsx
@@ -35,6 +50,7 @@ Components need no theme provider. The stylesheet defines the dark `--bt-*` toke
 <Button variant="outlined">Secondary</Button>
 <Button variant="text">Cancel</Button>
 <Button variant="icon" aria-label="Search"><SearchIcon /></Button>
+<Button variant="avatar" aria-label="User menu">IB</Button>
 <Button variant="fab"><PlusIcon />New item</Button>
 <Button variant="mini-fab" aria-label="Add"><PlusIcon /></Button>
 <Button isDisabled>Unavailable</Button>
@@ -44,6 +60,10 @@ Components need no theme provider. The stylesheet defines the dark `--bt-*` toke
 `tone` accepts `primary` (default), `success`, `warn`, and `error`. Solid variants share the same background, automatically contrasting black/white label, and same-hue hover. Modern relative OKLCH color syntax derives these coordinated colors. Pass `background="#28a745"` or set `--bt-button-bg` in your own CSS Module to customize a solid action. Text/outlined/icon variants use neutral surfaces.
 
 Buttons expose React Aria's press API (`onPress`, `isDisabled`) and React 19's `ref` prop. Set `type="submit"` for form submission. Supply an accessible label for icon-only actions. Icons are ordinary React children; no icon package is imposed on consumers.
+
+Use `avatar` for initials-based profile/menu triggers: a 40px filled circle with
+normal-weight 18px initials, matching Cooking's Angular avatar. Compose it with
+`MenuTrigger` just like other buttons; keep the accessible name on the button.
 
 ## Forms
 
@@ -67,6 +87,19 @@ const options = [{ id: 'apple', label: 'Apple' }, { id: 'pear', label: 'Pear' }]
 Labels, descriptions, and validation messages are associated with the input automatically. `TextField`, `Select`, and `ComboBox` accept `error` for application validation. For an externally managed error, use `validationBehavior="aria"` to expose invalid state without waiting for native form submission. Native constraints (`isRequired`, `type`, `minLength`, etc.) also remain available.
 
 Select options have `{ id, label, isDisabled? }`; React Aria handles selection, typeahead, and filtering. Checkbox and switch controlled state uses `isSelected`/`onChange`; radio group state uses `value`/`onChange`. React Aria form `name` props support native form submissions.
+
+### Angular field and button baseline
+
+Fields default to `appearance="filled"`, with always-visible floating labels and
+the Angular theme's 56px content height (58px including its border). `TextField`,
+`Select`, and `ComboBox` also accept `appearance="outlined"`. On an outlined field
+over a custom surface, set `--bt-field-label-background` to that surface color.
+Required markers are visual only; the accessible name remains the supplied label.
+
+Buttons use Angular's 40px default height; icon buttons are circular, and FABs
+use 56px/40px sizes. Consumers needing taller touch targets can set `min-height`
+on their CSS Module class. See the repository's `docs/angular-component-audit.md`
+for the component-by-component comparison and remaining differences.
 
 ## Donut slider
 

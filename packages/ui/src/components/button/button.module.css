@@ -5,14 +5,16 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  min-height: 2.75rem;
-  padding: 0.65rem 1.1rem;
+  min-height: 2.5rem;
+  min-width: 4rem;
+  padding: 0 1.5rem;
   border: 1px solid transparent;
   border-radius: var(--bt-radius);
   background: var(--button-bg);
   color: white;
   color: oklch(from var(--button-bg) calc((0.62 - l) * infinity) 0 0);
-  font: 600 0.875rem / 1.25 var(--bt-font);
+  font: 500 0.875rem var(--bt-font);
+  letter-spacing: 0.006rem;
   text-decoration: none;
   cursor: pointer;
   transition:
@@ -48,7 +50,10 @@
 .button[data-variant='raised'],
 .button[data-variant='fab'],
 .button[data-variant='mini-fab'] {
-  box-shadow: 0 3px 8px rgb(0 0 0 / 30%);
+  box-shadow:
+    0 3px 1px -2px rgb(0 0 0 / 20%),
+    0 2px 2px rgb(0 0 0 / 14%),
+    0 1px 5px rgb(0 0 0 / 12%);
 }
 
 .button[data-variant='outlined'],
@@ -57,22 +62,51 @@
   background: transparent;
   color: var(--bt-text-default);
 }
+.button[data-variant='avatar'] {
+  width: 40px;
+  height: 40px;
+  min-height: 40px;
+  min-width: 40px;
+  flex-shrink: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--bt-outline);
+  color: var(--bt-text-on-brand);
+  font:
+    400 18px Arial,
+    sans-serif;
+  user-select: none;
+  letter-spacing: normal;
+}
 
 .button[data-variant='outlined'] {
-  border-color: var(--bt-outline);
+  border-color: transparent;
+}
+.button[data-variant='text'] {
+  padding-inline: 0.75rem;
 }
 .button[data-variant='icon'] {
-  width: 2.75rem;
+  width: 2.5rem;
+  min-width: 2.5rem;
   padding: 0.5rem;
+  border: 0;
+  border-radius: 50%;
+  color: var(--bt-text-muted);
+  font-size: 1.5rem;
+  letter-spacing: normal;
 }
 .button[data-variant='fab'] {
   min-height: 3.5rem;
   min-width: 3.5rem;
-  border-radius: var(--bt-radius-lg);
+  padding-inline: 1.25rem;
+  border-radius: 1rem;
 }
 .button[data-variant='mini-fab'] {
-  width: 2.75rem;
-  padding: 0.5rem;
+  width: 2.5rem;
+  min-width: 2.5rem;
+  padding: 0;
+  border-radius: 0.75rem;
 }
 
 .button:is([data-variant='outlined'], [data-variant='text'], [data-variant='icon']):is(
@@ -83,10 +117,13 @@
 }
 
 .button[data-disabled] {
-  background: var(--bt-surface-2);
-  color: var(--bt-text-muted);
+  background: color-mix(in srgb, var(--bt-text-default) 12%, transparent);
+  color: color-mix(in srgb, var(--bt-text-default) 38%, transparent);
   box-shadow: none;
   cursor: not-allowed;
+}
+.button:is([data-variant='text'], [data-variant='outlined'], [data-variant='icon'])[data-disabled] {
+  background: transparent;
 }
 
 @media (prefers-reduced-motion: reduce) {

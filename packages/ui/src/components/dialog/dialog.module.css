@@ -5,24 +5,24 @@
   display: grid;
   place-items: center;
   padding: 1rem;
-  background: rgb(0 0 0 / 60%);
-  backdrop-filter: blur(3px);
+  background: rgb(0 0 0 / 32%);
   overflow-y: auto;
 }
 .modal {
+  --bt-field-label-background: var(--bt-surface-1);
   width: min(100%, 32rem);
   max-height: calc(100dvh - 2rem);
   overflow-y: auto;
-  border: 1px solid var(--bt-outline);
+  border: 0;
   border-radius: var(--bt-radius-lg);
   background: var(--bt-surface-1);
   color: var(--bt-text-default);
-  box-shadow: var(--bt-shadow);
+  box-shadow: none;
 }
 .dialog {
   padding: 1.5rem;
   outline: none;
-  font: 0.9375rem / 1.6 var(--bt-font);
+  font: 0.875rem / 1.25rem var(--bt-font);
 }
 .header {
   display: flex;
@@ -32,11 +32,11 @@
   margin-bottom: 0.5rem;
 }
 .title {
-  font-size: 1.25rem;
+  font: 400 1.5rem / 2rem var(--bt-font);
   color: var(--bt-text-strong);
   margin: 0;
 }
 .description {
-  color: var(--bt-text-muted);
+  color: var(--bt-text-default);
   margin: 0 0 1.5rem;
 }

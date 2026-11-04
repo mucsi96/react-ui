@@ -33,6 +33,7 @@ interface FieldProps {
   description?: ReactNode;
   error?: ReactNode;
   placeholder?: string;
+  appearance?: 'outlined' | 'filled';
   className?: string;
 }
 
@@ -47,6 +48,7 @@ export function Select({
   description,
   error,
   placeholder = 'Select an option',
+  appearance = 'filled',
   className,
   ...props
 }: SelectProps) {
@@ -56,12 +58,18 @@ export function Select({
       isInvalid={!!error || props.isInvalid}
       className={classes(styles.field, className)}
       placeholder={placeholder}
+      data-appearance={appearance}
     >
-      <Label className={styles.label}>{label}</Label>
-      <Button className={styles.selectButton}>
-        <SelectValue />
-        <Icon name="chevron-down" />
-      </Button>
+      <div className={styles.surface}>
+        <Label className={styles.floatingLabel}>
+          {label}
+          {props.isRequired && <span aria-hidden="true"> *</span>}
+        </Label>
+        <Button className={styles.selectButton}>
+          <SelectValue />
+          <Icon name="chevron-down" />
+        </Button>
+      </div>
       {description && (
         <Text slot="description" className={styles.description}>
           {description}
@@ -97,6 +105,7 @@ export function ComboBox({
   description,
   error,
   placeholder = 'Search…',
+  appearance = 'filled',
   className,
   ...props
 }: ComboBoxProps) {
@@ -106,14 +115,20 @@ export function ComboBox({
       defaultItems={options}
       isInvalid={!!error || props.isInvalid}
       className={classes(styles.field, className)}
+      data-appearance={appearance}
     >
-      <Label className={styles.label}>{label}</Label>
-      <Group className={styles.combo}>
-        <Input className={styles.input} placeholder={placeholder} />
-        <Button className={styles.comboButton} aria-label={`Show ${label.toLowerCase()} options`}>
-          <Icon name="chevron-down" />
-        </Button>
-      </Group>
+      <div className={styles.surface}>
+        <Label className={styles.floatingLabel}>
+          {label}
+          {props.isRequired && <span aria-hidden="true"> *</span>}
+        </Label>
+        <Group className={styles.combo}>
+          <Input className={styles.input} placeholder={placeholder} />
+          <Button className={styles.comboButton} aria-label={`Show ${label.toLowerCase()} options`}>
+            <Icon name="chevron-down" />
+          </Button>
+        </Group>
+      </div>
       {description && (
         <Text slot="description" className={styles.description}>
           {description}

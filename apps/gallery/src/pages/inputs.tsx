@@ -54,7 +54,11 @@ export default function InputsPage() {
           />
           <TextField label="Password" type="password" description="At least 12 characters" />
           <TextField label="Disabled field" defaultValue="Read-only example" isDisabled />
-          <TextField label="Filled field" appearance="filled" placeholder="A little more surface" />
+          <TextField
+            label="Outlined field"
+            appearance="outlined"
+            placeholder="An outlined alternative"
+          />
           <TextField label="Bio" multiline />
         </div>
       </Demo>
@@ -109,6 +113,7 @@ export default function InputsPage() {
         <div className={styles.stack}>
           <Checkbox defaultSelected>Subscribe to newsletter</Checkbox>
           <Checkbox>Product updates</Checkbox>
+          <Checkbox isIndeterminate>Partially selected</Checkbox>
           <Checkbox isDisabled>Disabled option</Checkbox>
         </div>
         <RadioGroup label="Size" defaultValue="medium">
@@ -119,6 +124,7 @@ export default function InputsPage() {
         <div className={styles.stack}>
           <Switch defaultSelected>Notifications</Switch>
           <Switch>Beta features</Switch>
+          <Switch isDisabled>Disabled switch</Switch>
         </div>
       </Demo>
     </>

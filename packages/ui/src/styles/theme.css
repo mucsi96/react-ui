@@ -9,7 +9,10 @@
   --bt-text-strong: white;
   --bt-text-default: hsl(220, 13%, 91%);
   --bt-text-muted: hsl(218, 11%, 65%);
+  --bt-text-muted-on-raised: #aab2bf;
   --bt-text-on-brand: white;
+  --bt-surface-inverse: #e5e1e6;
+  --bt-text-inverse: #303034;
   --bt-primary: hsl(220, 89%, 53%);
   --bt-primary-hover: hsl(221, 79%, 48%);
   --bt-link: hsl(218, 93%, 61%);
@@ -25,8 +28,9 @@
   --bt-error-hover: hsl(0, 74%, 45%);
   --bt-error-soft: hsl(0, 96%, 77%);
   --bt-error-on: hsl(0, 74%, 16%);
-  --bt-font: system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --bt-font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+  --bt-font: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --bt-font-body: -apple-system, BlinkMacSystemFont, 'SF Pro Text', Roboto, sans-serif;
+  --bt-font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
   --bt-radius: 0.5rem;
   --bt-radius-lg: 0.75rem;
   --bt-shadow: 0 8px 32px rgb(0 0 0 / 25%);

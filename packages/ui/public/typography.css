@@ -1,0 +1,22 @@
+/* Opt-in application typography, matching angular-material-theme's heading reset.
+ * Import after styles.css and before application-specific styles. */
+html {
+  font-family: var(--bt-font);
+  background: var(--bt-surface-0);
+  color: var(--bt-text-default);
+}
+
+body {
+  font-family: var(--bt-font-body);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: unset;
+  font-weight: unset;
+  margin: unset;
+}
