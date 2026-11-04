@@ -23,6 +23,7 @@
   font-size: 0.875rem;
 }
 .preview {
+  --bt-field-label-background: var(--bt-surface-1);
   display: flex;
   flex-wrap: wrap;
   align-items: center;

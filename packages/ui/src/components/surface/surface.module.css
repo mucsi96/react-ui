@@ -1,11 +1,12 @@
 .card {
+  --bt-field-label-background: var(--bt-surface-1);
   box-sizing: border-box;
-  padding: 1.5rem;
+  padding: 1rem;
   border: 1px solid var(--bt-outline);
   border-radius: var(--bt-radius-lg);
   background: var(--bt-surface-1);
   color: var(--bt-text-default);
-  font-family: var(--bt-font);
+  font-family: var(--bt-font-body);
 }
 .card[data-variant='elevated'] {
   border-color: transparent;
@@ -16,32 +17,39 @@
   max-width: 100%;
   display: inline-flex;
   align-items: center;
-  padding: 0.2rem 0.6rem;
-  border-radius: 0.3rem;
-  background: var(--bt-surface-2);
-  color: var(--bt-text-default);
-  font: 600 0.75rem / 1.5 var(--bt-font);
+  box-sizing: border-box;
+  min-height: 2rem;
+  padding: 0 0.75rem;
+  border: 1px solid var(--bt-outline);
+  border-radius: 0.5rem;
+  background: transparent;
+  color: var(--bt-text-muted);
+  font: 500 0.875rem / 1.25rem var(--bt-font);
 }
 .badge[data-tone='primary'] {
+  border-color: transparent;
   background: color-mix(in srgb, var(--bt-primary) 25%, transparent);
   color: var(--bt-link-hint);
 }
 .badge[data-tone='success'] {
+  border-color: transparent;
   background: var(--bt-success-soft);
   color: var(--bt-success-on);
 }
 .badge[data-tone='warn'] {
+  border-color: transparent;
   background: var(--bt-warn-soft);
   color: var(--bt-surface-0);
 }
 .badge[data-tone='error'] {
+  border-color: transparent;
   background: var(--bt-error-soft);
   color: var(--bt-error-on);
 }
 .heading {
   color: var(--bt-text-strong);
-  font-family: var(--bt-font);
-  font-weight: 650;
+  font-family: var(--bt-font-body);
+  font-weight: 400;
   line-height: 1.2;
   letter-spacing: -0.025em;
   margin: 0;
@@ -62,7 +70,7 @@ h6.heading {
 }
 .text {
   color: var(--bt-text-default);
-  font: 1rem / 1.7 var(--bt-font);
+  font: 1rem / 1.6 var(--bt-font-body);
   margin: 0;
 }
 .muted {
@@ -73,10 +81,10 @@ h6.heading {
   max-width: 100%;
   background: var(--bt-surface-2);
   border-radius: 0.25rem;
-  padding: 0.1rem 0.3rem;
-  color: var(--bt-text-default);
+  padding: 0.1em 0.35em;
+  color: var(--bt-text-strong);
   font-family: var(--bt-font-mono);
-  font-size: 0.85em;
+  font-size: 0.9em;
 }
 .divider {
   border: 0;

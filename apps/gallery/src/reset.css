@@ -8,7 +8,6 @@ html {
 }
 body {
   margin: 0;
-  font-family: var(--bt-font);
   color: var(--bt-text-default);
 }
 button,

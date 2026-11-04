@@ -5,7 +5,8 @@ import { classes } from '../../internal/classes';
 import type { Tone } from '../../types';
 import styles from './button.module.css';
 
-export type ButtonVariant = 'filled' | 'raised' | 'outlined' | 'text' | 'icon' | 'fab' | 'mini-fab';
+export type ButtonVariant =
+  'filled' | 'raised' | 'outlined' | 'text' | 'icon' | 'avatar' | 'fab' | 'mini-fab';
 
 interface Appearance {
   variant?: ButtonVariant;

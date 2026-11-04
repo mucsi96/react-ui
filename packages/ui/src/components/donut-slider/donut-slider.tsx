@@ -65,11 +65,16 @@ export function DonutSlider({
   if (min !== undefined && max !== undefined && min > max) {
     throw new RangeError('DonutSlider min must not exceed max.');
   }
+  if (!Number.isFinite(size) || size < 16) {
+    throw new RangeError('DonutSlider requires a finite size of at least 16 pixels.');
+  }
 
   const currentValue = normalize(value ?? internalValue, step, min, max);
   const fraction = (((currentValue / valuePerTurn) % 1) + 1) % 1;
   const radians = ((fraction * 360 - 90) * Math.PI) / 180;
-  const radius = 90;
+  const stroke = Math.round(size * 0.14);
+  const center = size / 2;
+  const radius = center - stroke / 2 - 4;
   const circumference = 2 * Math.PI * radius;
   const formatted = currentValue.toFixed(Math.min(20, Math.max(0, Math.trunc(displayDecimals))));
 
@@ -162,7 +167,7 @@ export function DonutSlider({
       onKeyDown={onKeyDown}
     >
       <svg
-        viewBox="0 0 220 220"
+        viewBox={`0 0 ${size} ${size}`}
         className={styles.svg}
         aria-hidden="true"
         onPointerDown={onPointerDown}
@@ -171,19 +176,22 @@ export function DonutSlider({
         onPointerCancel={endDrag}
         onLostPointerCapture={endDrag}
       >
-        <circle cx="110" cy="110" r={radius} className={styles.track} />
+        <circle cx={center} cy={center} r={radius} strokeWidth={stroke} className={styles.track} />
+        {fraction * 360 > 0.5 && (
+          <circle
+            cx={center}
+            cy={center}
+            r={radius}
+            strokeWidth={stroke}
+            className={styles.progress}
+            strokeDasharray={`${fraction * circumference} ${circumference}`}
+            transform={`rotate(-90 ${center} ${center})`}
+          />
+        )}
         <circle
-          cx="110"
-          cy="110"
-          r={radius}
-          className={styles.progress}
-          strokeDasharray={`${fraction * circumference} ${circumference}`}
-          transform="rotate(-90 110 110)"
-        />
-        <circle
-          cx={110 + radius * Math.cos(radians)}
-          cy={110 + radius * Math.sin(radians)}
-          r="15"
+          cx={center + radius * Math.cos(radians)}
+          cy={center + radius * Math.sin(radians)}
+          r={stroke / 2 + 2}
           className={styles.handle}
         />
       </svg>

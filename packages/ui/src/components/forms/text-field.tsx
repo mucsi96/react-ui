@@ -30,7 +30,7 @@ export function TextField({
   placeholder,
   multiline = false,
   rows = 3,
-  appearance = 'outlined',
+  appearance = 'filled',
   className,
   ref,
   ...props
@@ -43,12 +43,17 @@ export function TextField({
       className={classes(styles.field, className)}
       data-appearance={appearance}
     >
-      <Label className={styles.label}>{label}</Label>
-      {multiline ? (
-        <TextArea className={styles.input} placeholder={placeholder} rows={rows} />
-      ) : (
-        <Input className={styles.input} placeholder={placeholder} />
-      )}
+      <div className={styles.surface}>
+        <Label className={styles.floatingLabel}>
+          {label}
+          {props.isRequired && <span aria-hidden="true"> *</span>}
+        </Label>
+        {multiline ? (
+          <TextArea className={styles.input} placeholder={placeholder} rows={rows} />
+        ) : (
+          <Input className={styles.input} placeholder={placeholder} />
+        )}
+      </div>
       {description && (
         <Text slot="description" className={styles.description}>
           {description}
