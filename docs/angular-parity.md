@@ -31,6 +31,14 @@ for both versions; component geometry, colors, and fonts are not overridden.
 Regenerate against the separately served reference app with
 `ANGULAR_BASE_URL=http://127.0.0.1:4261 node scripts/capture-angular-avatar.ts`.
 
+The checked-in PNGs are reference evidence. The automated visual assertion renders
+`tests/e2e/fixtures/angular-avatar.html` (the frozen original native-button markup
+and styles) in the **same browser context** as React. This avoids host font-package
+differences between development and CI without accepting changed glyphs or shape.
+It requires identical 40×40 dimensions and zero differing pixels, allowing only
+two RGB levels per channel for HSL-to-hex rounding. Both images are attached to
+the Playwright report on every run.
+
 ## Cooking integration after publication
 
 The Cooking checkout is deliberately unchanged until the library is released.

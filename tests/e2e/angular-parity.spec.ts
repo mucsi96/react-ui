@@ -1,19 +1,18 @@
 import { expect, test } from '@playwright/test';
-import { avatarReferenceStyle } from './avatar-reference';
+import { avatarReferenceStyle, compareAngularAvatar } from './avatar-reference';
 
-// Avatar images were captured from Cooking ee5828c with angular-material-theme
-// 1.12.0, not generated from this implementation. See docs/angular-parity.md.
+// The reference is frozen Angular native-button markup, rendered in this same
+// browser so host font packages cannot invalidate the visual comparison.
 test('profile avatar preserves the Angular appearance and keyboard menu behavior', async ({
   page,
-}) => {
+}, testInfo) => {
   await page.goto('#/menus');
   const avatar = page.getByRole('button', { name: 'User menu', exact: true });
   const stage = await page.addStyleTag({ content: avatarReferenceStyle('User menu') });
-  await expect(avatar).toHaveScreenshot('angular-avatar.png', {
-    maxDiffPixels: 0,
-    // Production CSS rounds HSL tokens to hex; edge antialiasing differs by
-    // at most two RGB levels from Angular's unminified HSL reference.
-    threshold: 0.01,
+  expect(await compareAngularAvatar(page, avatar, testInfo)).toEqual({
+    actualSize: [40, 40],
+    expectedSize: [40, 40],
+    differentPixels: 0,
   });
   await stage.evaluate((element) => element.parentNode?.removeChild(element));
   await avatar.focus();
