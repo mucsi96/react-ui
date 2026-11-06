@@ -1,4 +1,5 @@
 :root {
+  font-family: var(--bt-font);
   color-scheme: dark;
   --bt-surface-0: hsl(221, 39%, 11%);
   --bt-surface-1: hsl(215, 28%, 17%);

@@ -39,7 +39,9 @@ import './styles.css';
 This restores normal-weight, unscaled native headings with no default margins.
 Set page-specific heading sizes and spacing in your CSS Modules. All font tokens
 (`--bt-font`, `--bt-font-body`, and the compatibility token `--bt-font-mono`) use
-only `system-ui`, including avatar initials and code. No font downloads are needed.
+only `system-ui`, including avatar initials and code. The main stylesheet applies
+the font to the document root, so applications need no font-family declarations
+or token overrides. No font downloads are needed.
 The optional stylesheet does not import fonts or reset page layouts.
 
 ## Buttons

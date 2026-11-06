@@ -79,6 +79,7 @@ Source files: `client/src/app/app.component.{css,html}`,
 Full-page parity requires that consumer integration and desktop/mobile screenshot
 comparison. The library regression tests cover shared components and the avatar;
 they do not claim that the unmodified Cooking React pages are pixel-identical.
+
 # System-font update
 
 The current font policy supersedes the original font-stack findings below: all
