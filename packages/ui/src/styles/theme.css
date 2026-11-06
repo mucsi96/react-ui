@@ -30,8 +30,6 @@
   --bt-error-soft: hsl(0, 96%, 77%);
   --bt-error-on: hsl(0, 74%, 16%);
   --bt-font: system-ui;
-  --bt-font-body: system-ui;
-  --bt-font-mono: system-ui;
   --bt-radius: 0.5rem;
   --bt-radius-lg: 0.75rem;
   --bt-shadow: 0 8px 32px rgb(0 0 0 / 25%);

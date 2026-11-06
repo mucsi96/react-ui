@@ -37,9 +37,8 @@ import './styles.css';
 ```
 
 This restores normal-weight, unscaled native headings with no default margins.
-Set page-specific heading sizes and spacing in your CSS Modules. All font tokens
-(`--bt-font`, `--bt-font-body`, and the compatibility token `--bt-font-mono`) use
-only `system-ui`, including avatar initials and code. The main stylesheet applies
+Set page-specific heading sizes and spacing in your CSS Modules. The single font
+token `--bt-font` uses only `system-ui`, including avatar initials and code. The main stylesheet applies
 the font to the document root, so applications need no font-family declarations
 or token overrides. No font downloads are needed.
 The optional stylesheet does not import fonts or reset page layouts.
@@ -266,6 +265,6 @@ All loading animations respect reduced motion. `Card` supports `outlined` and `e
 }
 ```
 
-Use `className` to extend styles without reaching into internal module selectors. The public palette includes `surface-0` through `surface-4`, `outline`, `text-strong`, `text-default`, `text-muted`, `text-on-brand`, `primary`, `primary-hover`, `link`, `link-hint`, semantic `success`/`warn`/`error` colors, hover variants, soft variants, and success/error foreground tokens. Shared `--bt-font`, `--bt-font-mono`, `--bt-radius`, `--bt-radius-lg`, and `--bt-shadow` tokens complete the foundation.
+Use `className` to extend styles without reaching into internal module selectors. The public palette includes `surface-0` through `surface-4`, `outline`, `text-strong`, `text-default`, `text-muted`, `text-on-brand`, `primary`, `primary-hover`, `link`, `link-hint`, semantic `success`/`warn`/`error` colors, hover variants, soft variants, and success/error foreground tokens. Shared `--bt-font`, `--bt-radius`, `--bt-radius-lg`, and `--bt-shadow` tokens complete the foundation.
 
 MIT © Igor Bari
