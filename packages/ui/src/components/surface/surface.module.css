@@ -83,7 +83,7 @@ h6.heading {
   border-radius: 0.25rem;
   padding: 0.1em 0.35em;
   color: var(--bt-text-strong);
-  font-family: var(--bt-font);
+  font-family: ui-monospace, monospace;
   font-size: 0.9em;
 }
 .divider {
