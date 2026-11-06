@@ -29,7 +29,7 @@ export default function TypographyPage() {
       </Demo>
       <Demo
         title="Application typography"
-        description="Opt in to typography.css to restore the Angular heading reset. Page-specific sizes remain in your CSS Modules."
+        description="Opt in to typography.css to normalize native headings. Page-specific sizes remain in your CSS Modules."
         code={`import '@mucsi96/react-ui/styles.css';
 import '@mucsi96/react-ui/typography.css';
 

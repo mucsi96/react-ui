@@ -28,7 +28,7 @@ All direct dependencies were installed from npm's latest stable versions. Exact 
 | Feedback          | `Alert`, `NotificationsProvider`, `useNotifications`, `BarLoader`, `Spinner`, `ProgressBar`                    |
 | Surfaces and type | `Card`, `Badge`, `Heading`, `Text`, `Code`, `Divider`                                                          |
 
-The design tokens, dark surfaces, semantic button colors, five-bar loader, split actions, and multi-turn rotary input share their visual foundation with [angular-material-theme](https://github.com/mucsi96/angular-material-theme) and [ui-elements](https://github.com/mucsi96/ui-elements).
+The library provides shared design tokens, dark surfaces, semantic button colors, a five-bar loader, split actions, and a multi-turn rotary input for React applications.
 
 ## Develop
 

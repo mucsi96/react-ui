@@ -1,19 +1,14 @@
 import { expect, test } from '@playwright/test';
-import { avatarReferenceStyle, compareAngularAvatar } from './avatar-reference';
 
-// Preserve Angular geometry with the explicitly requested system-ui font.
-test('profile avatar preserves the Angular appearance and keyboard menu behavior', async ({
-  page,
-}, testInfo) => {
+test('profile avatar uses system typography and supports keyboard menus', async ({ page }) => {
   await page.goto('#/menus');
   const avatar = page.getByRole('button', { name: 'User menu', exact: true });
-  const stage = await page.addStyleTag({ content: avatarReferenceStyle('User menu') });
-  expect(await compareAngularAvatar(page, avatar, testInfo)).toEqual({
-    actualSize: [40, 40],
-    expectedSize: [40, 40],
-    differentPixels: 0,
-  });
-  await stage.evaluate((element) => element.parentNode?.removeChild(element));
+  await expect(avatar).toHaveCSS('width', '40px');
+  await expect(avatar).toHaveCSS('height', '40px');
+  await expect(avatar).toHaveCSS('border-radius', '50%');
+  await expect(avatar).toHaveCSS('font-family', 'system-ui');
+  await expect(avatar).toHaveCSS('font-size', '18px');
+  await expect(avatar).toHaveCSS('font-weight', '400');
   await avatar.focus();
   await page.keyboard.press('Enter');
   await expect(page.getByRole('menu', { name: 'User menu', exact: true })).toBeVisible();
@@ -24,7 +19,7 @@ test('profile avatar preserves the Angular appearance and keyboard menu behavior
   await expect(page.getByRole('button', { name: 'Disabled user menu' })).toBeDisabled();
 });
 
-test('Angular typography baseline prevents browser-bold headings and semibold controls', async ({
+test('typography reset normalizes headings and controls use the shared system font', async ({
   page,
 }) => {
   await page.goto('#/typography');
