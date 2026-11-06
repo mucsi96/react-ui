@@ -37,10 +37,10 @@ import './styles.css';
 ```
 
 This restores normal-weight, unscaled native headings with no default margins.
-Set page-specific heading sizes and spacing in your CSS Modules. `--bt-font`
-matches Angular Material's system-font stack; `--bt-font-body` matches Cooking's
-Apple/Roboto body stack. Bundle Roboto locally if your application uses that
-fallback. The optional stylesheet does not import fonts or reset page layouts.
+Set page-specific heading sizes and spacing in your CSS Modules. All font tokens
+(`--bt-font`, `--bt-font-body`, and the compatibility token `--bt-font-mono`) use
+only `system-ui`, including avatar initials and code. No font downloads are needed.
+The optional stylesheet does not import fonts or reset page layouts.
 
 ## Buttons
 

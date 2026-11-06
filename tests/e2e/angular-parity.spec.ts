@@ -1,8 +1,7 @@
 import { expect, test } from '@playwright/test';
 import { avatarReferenceStyle, compareAngularAvatar } from './avatar-reference';
 
-// The reference is frozen Angular native-button markup, rendered in this same
-// browser so host font packages cannot invalidate the visual comparison.
+// Preserve Angular geometry with the explicitly requested system-ui font.
 test('profile avatar preserves the Angular appearance and keyboard menu behavior', async ({
   page,
 }, testInfo) => {
@@ -41,7 +40,7 @@ test('Angular typography baseline prevents browser-bold headings and semibold co
   );
   await expect(page.getByRole('heading', { name: 'Workspace', exact: true })).toHaveCSS(
     'font-family',
-    '-apple-system, BlinkMacSystemFont, "SF Pro Text", Roboto, sans-serif',
+    'system-ui',
   );
   await page.goto('#/menus');
   await expect(page.getByRole('button', { name: 'Actions', exact: true })).toHaveCSS(
@@ -50,6 +49,6 @@ test('Angular typography baseline prevents browser-bold headings and semibold co
   );
   await expect(page.getByRole('button', { name: 'Actions', exact: true })).toHaveCSS(
     'font-family',
-    'system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+    'system-ui',
   );
 });

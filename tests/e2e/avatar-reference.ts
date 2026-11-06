@@ -27,7 +27,10 @@ export async function compareAngularAvatar(page: Page, avatar: Locator, testInfo
     await reference.setContent(
       await readFile(new URL('./fixtures/angular-avatar.html', import.meta.url), 'utf8'),
     );
-    await reference.addStyleTag({ content: avatarReferenceStyle('Felhasználói menü') });
+    // Typography deliberately differs from the frozen Angular fixture.
+    await reference.addStyleTag({
+      content: avatarReferenceStyle('Felhasználói menü') + '\n.avatar { font-family: system-ui; }',
+    });
     const expected = await reference
       .getByRole('button', { name: 'Felhasználói menü' })
       .screenshot({ scale: 'css' });

@@ -1,5 +1,9 @@
 # Full component parity audit
 
+**Font policy update:** all current font tokens and avatars now use only
+`system-ui`, by request. Font-stack and Arial references below describe the
+original Angular audit, not the current font policy. The reset behavior remains.
+
 ## Reference and method
 
 Audited every public component exported by `packages/ui/src/index.ts` against:
