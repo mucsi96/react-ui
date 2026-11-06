@@ -27,8 +27,8 @@ export function SaveAction() {
 
 Components need no theme provider. The stylesheet defines the dark `--bt-*` tokens and `color-scheme` on `:root`; all component selectors and animations are locally scoped. It does not reset your application's typography or layout. The library entry is marked as a client boundary for React Server Component frameworks.
 
-For applications migrating from `@mucsi96/angular-material-theme`, opt in to the
-matching typography baseline before your application styles:
+To normalize native headings, opt in to the typography reset before your
+application styles:
 
 ```tsx
 import '@mucsi96/react-ui/styles.css';
@@ -37,10 +37,12 @@ import './styles.css';
 ```
 
 This restores normal-weight, unscaled native headings with no default margins.
-Set page-specific heading sizes and spacing in your CSS Modules. `--bt-font`
-matches Angular Material's system-font stack; `--bt-font-body` matches Cooking's
-Apple/Roboto body stack. Bundle Roboto locally if your application uses that
-fallback. The optional stylesheet does not import fonts or reset page layouts.
+Set page-specific heading sizes and spacing in your CSS Modules. The single font
+token `--bt-font` uses only `system-ui`, including avatar initials. Code uses an
+inline `ui-monospace, monospace` stack without a font token. The main stylesheet applies
+the font to the document root, so applications need no font-family declarations
+or token overrides. No font downloads are needed.
+The optional stylesheet does not import fonts or reset page layouts.
 
 ## Buttons
 
@@ -62,7 +64,7 @@ fallback. The optional stylesheet does not import fonts or reset page layouts.
 Buttons expose React Aria's press API (`onPress`, `isDisabled`) and React 19's `ref` prop. Set `type="submit"` for form submission. Supply an accessible label for icon-only actions. Icons are ordinary React children; no icon package is imposed on consumers.
 
 Use `avatar` for initials-based profile/menu triggers: a 40px filled circle with
-normal-weight 18px initials, matching Cooking's Angular avatar. Compose it with
+normal-weight 18px initials. Compose it with
 `MenuTrigger` just like other buttons; keep the accessible name on the button.
 
 ## Forms
@@ -88,18 +90,17 @@ Labels, descriptions, and validation messages are associated with the input auto
 
 Select options have `{ id, label, isDisabled? }`; React Aria handles selection, typeahead, and filtering. Checkbox and switch controlled state uses `isSelected`/`onChange`; radio group state uses `value`/`onChange`. React Aria form `name` props support native form submissions.
 
-### Angular field and button baseline
+### Field and button sizing
 
 Fields default to `appearance="filled"`, with always-visible floating labels and
-the Angular theme's 56px content height (58px including its border). `TextField`,
+a 56px content height (58px including its border). `TextField`,
 `Select`, and `ComboBox` also accept `appearance="outlined"`. On an outlined field
 over a custom surface, set `--bt-field-label-background` to that surface color.
 Required markers are visual only; the accessible name remains the supplied label.
 
-Buttons use Angular's 40px default height; icon buttons are circular, and FABs
+Buttons use a 40px default height; icon buttons are circular, and FABs
 use 56px/40px sizes. Consumers needing taller touch targets can set `min-height`
-on their CSS Module class. See the repository's `docs/angular-component-audit.md`
-for the component-by-component comparison and remaining differences.
+on their CSS Module class.
 
 ## Donut slider
 
@@ -264,6 +265,6 @@ All loading animations respect reduced motion. `Card` supports `outlined` and `e
 }
 ```
 
-Use `className` to extend styles without reaching into internal module selectors. The public palette includes `surface-0` through `surface-4`, `outline`, `text-strong`, `text-default`, `text-muted`, `text-on-brand`, `primary`, `primary-hover`, `link`, `link-hint`, semantic `success`/`warn`/`error` colors, hover variants, soft variants, and success/error foreground tokens. Shared `--bt-font`, `--bt-font-mono`, `--bt-radius`, `--bt-radius-lg`, and `--bt-shadow` tokens complete the foundation.
+Use `className` to extend styles without reaching into internal module selectors. The public palette includes `surface-0` through `surface-4`, `outline`, `text-strong`, `text-default`, `text-muted`, `text-on-brand`, `primary`, `primary-hover`, `link`, `link-hint`, semantic `success`/`warn`/`error` colors, hover variants, soft variants, and success/error foreground tokens. Shared `--bt-font`, `--bt-radius`, `--bt-radius-lg`, and `--bt-shadow` tokens complete the foundation.
 
 MIT © Igor Bari

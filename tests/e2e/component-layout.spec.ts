@@ -1,8 +1,7 @@
 import { expect, test } from '@playwright/test';
 
-// Reference values measured in the Angular gallery at e77a509; see the audit.
-// Guard density/shape regressions alongside the behavioral gallery suite.
-test('buttons and split triggers retain Angular density', async ({ page }) => {
+// Guard component sizing and shape alongside the behavioral gallery suite.
+test('buttons and split triggers retain their compact sizing', async ({ page }) => {
   await page.goto('#/buttons');
   const region = page.getByRole('region', { name: 'Semantic button colors' });
   const filled = region.getByRole('button', { name: 'filled primary', exact: true });
@@ -50,7 +49,7 @@ test('floating fields preserve labels, multiline sizing, errors and keyboard cho
   await expect(select).toContainText('Apple');
 });
 
-test('menus and nested triggers keep the Angular row geometry', async ({ page }) => {
+test('menus and nested triggers keep consistent row geometry', async ({ page }) => {
   await page.goto('#/menus');
   await page.getByRole('button', { name: 'Actions', exact: true }).click();
   const item = page.getByRole('menuitem', { name: 'Edit', exact: true });
@@ -82,7 +81,7 @@ test('checkbox, radio and switch states remain keyboard accessible', async ({ pa
   await expect(page.getByRole('switch', { name: 'Disabled switch' })).toBeDisabled();
 });
 
-test('table density matches Angular', async ({ page }) => {
+test('table headers and cells retain their defined heights', async ({ page }) => {
   await page.goto('#/table');
   const table = page.getByRole('table').first();
   await expect(table.getByRole('columnheader').first()).toHaveCSS('height', '48px');
@@ -102,7 +101,7 @@ test('dialog title matches the reference without losing dismissal', async ({ pag
   await expect(trigger).toBeFocused();
 });
 
-test('donut geometry matches Angular and a full revolution has no progress dot', async ({
+test('donut geometry scales with size and a full revolution has no progress dot', async ({
   page,
 }) => {
   await page.goto('#/inputs');

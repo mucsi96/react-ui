@@ -73,9 +73,7 @@
   border-radius: 50%;
   background: var(--bt-outline);
   color: var(--bt-text-on-brand);
-  font:
-    400 18px Arial,
-    sans-serif;
+  font: 400 18px var(--bt-font);
   user-select: none;
   letter-spacing: normal;
 }

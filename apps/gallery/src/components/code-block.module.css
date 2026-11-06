@@ -5,7 +5,9 @@
   overflow-x: auto;
   background: var(--bt-surface-0);
   color: var(--bt-text-default);
-  font: 0.8rem / 1.75 var(--bt-font-mono);
+  font:
+    0.8rem / 1.75 ui-monospace,
+    monospace;
   tab-size: 2;
 }
 

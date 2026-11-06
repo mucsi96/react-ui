@@ -77,7 +77,7 @@ export default function MenusPage() {
       </Demo>
       <Demo
         title="Profile menu"
-        description="The circular initials avatar matches the Angular application's profile trigger."
+        description="A circular initials avatar for accessible profile menus."
         code={`<MenuTrigger>
   <Button variant="avatar" aria-label="User menu">IB</Button>
   <MenuPopover>

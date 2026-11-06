@@ -1,4 +1,4 @@
-/* Opt-in application typography, matching angular-material-theme's heading reset.
+/* Opt-in application typography and native heading reset.
  * Import after styles.css and before application-specific styles. */
 html {
   font-family: var(--bt-font);
@@ -7,7 +7,14 @@ html {
 }
 
 body {
-  font-family: var(--bt-font-body);
+  font-family: var(--bt-font);
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
 }
 
 h1,

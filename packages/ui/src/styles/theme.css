@@ -1,4 +1,5 @@
 :root {
+  font-family: var(--bt-font);
   color-scheme: dark;
   --bt-surface-0: hsl(221, 39%, 11%);
   --bt-surface-1: hsl(215, 28%, 17%);
@@ -28,9 +29,7 @@
   --bt-error-hover: hsl(0, 74%, 45%);
   --bt-error-soft: hsl(0, 96%, 77%);
   --bt-error-on: hsl(0, 74%, 16%);
-  --bt-font: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  --bt-font-body: -apple-system, BlinkMacSystemFont, 'SF Pro Text', Roboto, sans-serif;
-  --bt-font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+  --bt-font: system-ui;
   --bt-radius: 0.5rem;
   --bt-radius-lg: 0.75rem;
   --bt-shadow: 0 8px 32px rgb(0 0 0 / 25%);
