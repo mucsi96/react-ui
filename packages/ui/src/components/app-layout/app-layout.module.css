@@ -1,0 +1,48 @@
+.header {
+  box-sizing: border-box;
+  padding-block-start: env(safe-area-inset-top, 0px);
+  background: var(--bt-surface-1);
+  border-block-end: 1px solid var(--bt-outline);
+}
+
+.headerContent,
+.main {
+  box-sizing: border-box;
+  inline-size: 100%;
+  max-inline-size: var(--bt-app-max-width, 90rem);
+  margin-inline: auto;
+  padding-left: max(var(--bt-app-gutter, 1rem), env(safe-area-inset-left, 0px));
+  padding-right: max(var(--bt-app-gutter, 1rem), env(safe-area-inset-right, 0px));
+  overflow-wrap: anywhere;
+}
+
+.headerContent {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--bt-app-header-gap, 1rem);
+  min-block-size: var(--bt-app-header-height, 4rem);
+  padding-block: 0.5rem;
+}
+
+.headerContent > *,
+.actions > * {
+  min-inline-size: 0;
+  max-inline-size: 100%;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--bt-app-header-gap, 1rem);
+  margin-inline-start: auto;
+}
+
+.main {
+  display: flow-root;
+  padding-block-start: var(--bt-app-content-gap, 3rem);
+  padding-block-end: max(var(--bt-app-gutter, 1rem), env(safe-area-inset-bottom, 0px));
+}

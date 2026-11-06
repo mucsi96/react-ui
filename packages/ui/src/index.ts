@@ -1,3 +1,9 @@
+export { AppHeader, AppHeaderActions, AppMain } from './components/app-layout/app-layout';
+export type {
+  AppHeaderProps,
+  AppHeaderActionsProps,
+  AppMainProps,
+} from './components/app-layout/app-layout';
 export { Button, LinkButton } from './components/button/button';
 export type { ButtonProps, ButtonVariant, LinkButtonProps } from './components/button/button';
 export { TextField } from './components/forms/text-field';

@@ -4,6 +4,7 @@ import AxeBuilder from '@axe-core/playwright';
 import { captureGallery } from './screenshots';
 
 const pages = [
+  ['/app-layout', 'App layout'],
   ['/', 'A clear foundation.'],
   ['/buttons', 'Buttons'],
   ['/inputs', 'Inputs'],

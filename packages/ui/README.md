@@ -44,6 +44,46 @@ the font to the document root, so applications need no font-family declarations
 or token overrides. No font downloads are needed.
 The optional stylesheet does not import fonts or reset page layouts.
 
+## Application layout
+
+```tsx
+import { AppHeader, AppHeaderActions, AppMain } from '@mucsi96/react-ui';
+
+<AppHeader>
+  <a href="/">My application</a>
+  <AppHeaderActions>
+    <nav aria-label="Main navigation">{/* Application links */}</nav>
+    <ProfileMenu />
+  </AppHeaderActions>
+</AppHeader>
+<AppMain id="main-content">{/* Page content */}</AppMain>
+```
+
+`AppHeader` renders a native `header` with a width-constrained inner flex row.
+Its safe-area top padding sits outside the row's minimum height, so iOS status
+bars do not compress controls. Children wrap as needed. `AppHeaderActions` is a
+wrapping, end-aligned `div`; make any nested navigation groups wrap as well.
+`AppMain` renders a native `main` with matching horizontal gutters, page spacing,
+and bottom safe-area padding. All three accept native element props, including
+`className`, `style`, and React 19 `ref`. They use ordinary document flow.
+
+Set these inherited CSS variables on a common ancestor to customize the layout:
+
+| Variable                 | Default | Purpose                                              |
+| ------------------------ | ------- | ---------------------------------------------------- |
+| `--bt-app-max-width`     | `90rem` | Header row and main maximum width, including gutters |
+| `--bt-app-gutter`        | `1rem`  | Minimum horizontal and bottom page padding           |
+| `--bt-app-header-height` | `4rem`  | Minimum header row height, excluding top safe area   |
+| `--bt-app-header-gap`    | `1rem`  | Space between header children and actions            |
+| `--bt-app-content-gap`   | `3rem`  | Main content top padding                             |
+
+The host document should reset the body margin and include
+`<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">`
+for edge-to-edge safe-area handling. The library does not modify document metadata
+or global layout. Keep routing, profile fetching, navigation labels, and menu
+contents in the application; compose profile menus with `MenuTrigger` and
+`Button variant="avatar"`.
+
 ## Buttons
 
 ```tsx
