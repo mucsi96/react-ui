@@ -5,6 +5,7 @@ import { Badge, BarLoader } from '@mucsi96/react-ui';
 import styles from './app.module.css';
 
 const pages = [
+  { path: '/app-layout', label: 'App layout', component: lazy(() => import('./pages/app-layout')) },
   { path: '/', label: 'Overview', component: lazy(() => import('./pages/overview')) },
   { path: '/buttons', label: 'Buttons', component: lazy(() => import('./pages/buttons')) },
   { path: '/inputs', label: 'Inputs', component: lazy(() => import('./pages/inputs')) },
@@ -20,7 +21,8 @@ const pages = [
   { path: '/typography', label: 'Typography', component: lazy(() => import('./pages/typography')) },
 ];
 
-const OverviewPage = pages[0]!.component;
+const OverviewPage = pages.find((page) => page.path === '/')!.component;
+const LayoutPreview = lazy(() => import('./pages/layout-preview'));
 
 export function App() {
   const location = useLocation();
@@ -36,6 +38,14 @@ export function App() {
     });
     main.current?.focus();
   }, [location.pathname]);
+
+  if (location.pathname === '/layout-preview') {
+    return (
+      <Suspense fallback={<BarLoader label="Loading preview" />}>
+        <LayoutPreview />
+      </Suspense>
+    );
+  }
 
   return (
     <div className={styles.app}>
