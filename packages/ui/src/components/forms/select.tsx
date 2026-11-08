@@ -60,13 +60,13 @@ export function Select<M extends 'single' | 'multiple' = 'single'>({
       placeholder={placeholder}
       data-appearance={appearance}
     >
-      <div className={styles.surface}>
+      <div className={classes(styles.surface, styles.selectSurface)}>
         <Label className={styles.floatingLabel}>
           {label}
           {props.isRequired && <span aria-hidden="true"> *</span>}
         </Label>
         <Button className={styles.selectButton}>
-          <SelectValue />
+          <SelectValue className={styles.selectValue} />
           <Icon name="chevron-down" />
         </Button>
       </div>
