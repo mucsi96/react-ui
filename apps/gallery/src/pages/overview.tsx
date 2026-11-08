@@ -8,7 +8,7 @@ import {
   Text,
   Code,
   DonutSlider,
-  BarLoader,
+  LoadingArea,
 } from '@mucsi96/react-ui';
 import { Demo } from '../components/demo';
 import styles from './pages.module.css';
@@ -82,7 +82,7 @@ export default function OverviewPage() {
         description="The same surfaces, shape, typography, and semantic colors across every component."
         code={`<Button tone="success">Mark as known</Button>
 <DonutSlider label="Tip" unit="%" defaultValue={15} valuePerTurn={20} min={0} max={100} />
-<BarLoader label="Loading your workspace" />`}
+<LoadingArea label="Loading your workspace" />`}
       >
         <div className={styles.stack}>
           <Badge tone="success">All systems ready</Badge>
@@ -102,7 +102,7 @@ export default function OverviewPage() {
           max={100}
           size={180}
         />
-        <BarLoader label="Loading your workspace" />
+        <LoadingArea label="Loading your workspace" />
       </Demo>
       <Demo
         title="Design tokens"

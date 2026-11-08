@@ -1,7 +1,7 @@
 import { lazy, Suspense, useEffect, useRef } from 'react';
 import { NavLink, Route, Routes, useLocation } from 'react-router';
 import { Boxes, CodeXml, ArrowUpRight } from 'lucide-react';
-import { Badge, BarLoader } from '@mucsi96/react-ui';
+import { Badge, LoadingArea } from '@mucsi96/react-ui';
 import styles from './app.module.css';
 
 const pages = [
@@ -51,7 +51,7 @@ export function App() {
 
   if (location.pathname === '/layout-preview' || location.pathname === '/loading-preview') {
     return (
-      <Suspense fallback={<BarLoader label="Loading preview" />}>
+      <Suspense fallback={<LoadingArea label="Loading preview" />}>
         {location.pathname === '/loading-preview' ? <LoadingPreview /> : <LayoutPreview />}
       </Suspense>
     );
@@ -106,7 +106,7 @@ export function App() {
           </p>
         </aside>
         <main id="main-content" ref={main} tabIndex={-1} className={styles.main}>
-          <Suspense fallback={<BarLoader label="Loading documentation" />}>
+          <Suspense fallback={<LoadingArea label="Loading documentation" />}>
             <Routes>
               {pages.map(({ path, component: Page }) => (
                 <Route key={path} path={path} element={<Page />} />
