@@ -58,12 +58,12 @@ export type {
 } from './components/notifications/notifications';
 export { BarLoader, Spinner, ProgressBar } from './components/loader/loader';
 export type { BarLoaderProps, ProgressBarProps } from './components/loader/loader';
+export { LoadingArea } from './components/loading-area/loading-area';
+export type { LoadingAreaProps } from './components/loading-area/loading-area';
 export { Card, Badge, Heading, Text, Code, Divider } from './components/surface/surface';
 export type { CardProps, BadgeProps, HeadingProps, TextProps } from './components/surface/surface';
 export type { Tone } from './types';
 export { Tabs, TabList, Tab, TabPanel } from './components/tabs/tabs';
 export type { TabsProps, TabListProps, TabProps, TabPanelProps } from './components/tabs/tabs';
-export { Skeleton, SkeletonGroup } from './components/skeleton/skeleton';
-export type { SkeletonProps, SkeletonGroupProps } from './components/skeleton/skeleton';
 export { EmptyState } from './components/empty-state/empty-state';
 export type { EmptyStateProps } from './components/empty-state/empty-state';

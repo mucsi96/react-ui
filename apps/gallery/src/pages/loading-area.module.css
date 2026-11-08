@@ -1,0 +1,20 @@
+.page {
+  min-block-size: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  --bt-app-content-gap: 1rem;
+}
+
+.section {
+  inline-size: 100%;
+}
+
+.sectionArea {
+  min-block-size: 12rem;
+}

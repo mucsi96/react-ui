@@ -28,13 +28,18 @@ const pages = [
 
 const OverviewPage = pages.find((page) => page.path === '/')!.component;
 const LayoutPreview = lazy(() => import('./pages/layout-preview'));
+const LoadingPreview = lazy(() => import('./pages/loading-preview'));
 
 export function App() {
   const location = useLocation();
   const main = useRef<HTMLElement>(null);
   const activeLink = useRef<HTMLAnchorElement>(null);
   useEffect(() => {
-    document.title = `${pages.find((page) => page.path === location.pathname)?.label ?? 'Not found'} — React UI`;
+    const title =
+      location.pathname === '/loading-preview'
+        ? 'Loading workspace preview'
+        : (pages.find((page) => page.path === location.pathname)?.label ?? 'Not found');
+    document.title = `${title} — React UI`;
     window.scrollTo(0, 0);
     activeLink.current?.scrollIntoView({
       block: 'nearest',
@@ -44,10 +49,10 @@ export function App() {
     main.current?.focus();
   }, [location.pathname]);
 
-  if (location.pathname === '/layout-preview') {
+  if (location.pathname === '/layout-preview' || location.pathname === '/loading-preview') {
     return (
       <Suspense fallback={<BarLoader label="Loading preview" />}>
-        <LayoutPreview />
+        {location.pathname === '/loading-preview' ? <LoadingPreview /> : <LayoutPreview />}
       </Suspense>
     );
   }

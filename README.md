@@ -25,11 +25,15 @@ All direct dependencies were installed from npm's latest stable versions. Exact 
 | Inputs            | `TextField`, `NumberField`, `Select`, `MultiSelect`, `ComboBox`, `CheckboxGroup`, `Checkbox`, `RadioGroup`, `Radio`, `Switch`, `DonutSlider` |
 | Overlays          | `MenuTrigger`, `MenuPopover`, `Menu`, `MenuItem`, `MenuSeparator`, `SubmenuTrigger`, `DialogTrigger`, `Dialog`                               |
 | Data              | `DataTable` with typed columns, sorting, pagination, and controlled selection                                                                |
-| Feedback          | `Alert`, `NotificationsProvider`, `useNotifications`, `BarLoader`, `Spinner`, `ProgressBar`, `Skeleton`, `SkeletonGroup`, `EmptyState`       |
+| Feedback          | `Alert`, `NotificationsProvider`, `useNotifications`, `BarLoader`, `Spinner`, `ProgressBar`, `LoadingArea`, `EmptyState`                     |
 | Navigation        | `Tabs`, `TabList`, `Tab`, `TabPanel`                                                                                                         |
 | Surfaces and type | `Card`, `Badge`, `Heading`, `Text`, `Code`, `Divider`                                                                                        |
 
 The library provides shared design tokens, dark surfaces, semantic button colors, a five-bar loader, split actions, and a multi-turn rotary input for React applications.
+
+Use `LoadingArea` to replace skeleton placeholders with one accessible, locally
+centered loader in pages, sections, and dialogs. See the [sizing and adoption guide](packages/ui/README.md#centered-loading-areas)
+and the gallery's Loaders examples for compact and fill-available-space layouts.
 
 ## Develop
 

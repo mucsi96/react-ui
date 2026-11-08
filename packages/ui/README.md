@@ -349,6 +349,58 @@ This is a semantic HTML table. Columns with `compare` have three-state sorting (
 
 ## Loading, surfaces, and typography
 
+### Centered loading areas
+
+Replace a `SkeletonGroup` and its placeholders, or an individually positioned
+loader, with `<LoadingArea label="Loading collection" />`. Render the loaded
+content in its place when ready. The required `label` names one indeterminate
+`BarLoader`; no visible loading text or extra live region is added. Reduced-motion
+preferences are preserved. `Skeleton`, `SkeletonGroup`, and their prop types have
+been removed; migrate existing imports and placeholder groups to `LoadingArea`.
+
+The default compact area has an `8rem` minimum block size and `1rem` padding.
+Use `className`, `style`, and native div props (including `ref`) to customize its
+local size; for example, a dialog body can contain:
+
+```tsx
+<LoadingArea label="Loading source options" style={{ minBlockSize: '12rem' }} />
+```
+
+For a page, let the application establish the available space below its header:
+
+```tsx
+<div className={styles.page}>
+  <AppHeader>Workspace</AppHeader>
+  <AppMain className={styles.main}>
+    {isLoading ? <LoadingArea label="Loading workspace" fill /> : <Workspace />}
+  </AppMain>
+</div>
+```
+
+```css
+.page {
+  min-block-size: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  --bt-app-content-gap: 1rem;
+}
+```
+
+`fill` grows in a flex container or stretches in its assigned grid area, centering
+within the parent's content box. The parent must allocate space: `fill` does not
+create a viewport-sized area itself. For grid layouts, allocate the remaining
+space with a `1fr` row. In sections, set a local `minBlockSize` or `blockSize` as
+needed. The component uses document flow and no viewport positioning or global
+element selectors. Avoid wrapping it in another loading status/live region or
+adding redundant visible “Loading…” text.
+
+### Individual indicators and surfaces
+
 ```tsx
 <BarLoader label="Loading workspace" />
 <Spinner label="Fetching results" />
@@ -364,20 +416,6 @@ This is a semantic HTML table. Columns with `compare` have three-state sorting (
 ```
 
 All loading animations respect reduced motion. `Card` supports `outlined` and `elevated`; `Badge` accepts semantic tones and `neutral`. `Heading` supports semantic levels 1–6, `Text` supports `muted`, and `Code` provides inline monospace styling.
-
-Compose stable placeholders with `Skeleton` (`variant="text" | "image" | "row"`,
-optional `width`/`height` CSS values). Each shape is decorative and hidden from
-assistive technology. Wrap a set in `SkeletonGroup label="Loading collection"`
-for one visually hidden status label. Place row placeholders inside table cells,
-not directly inside a `tbody`. Animations stop under reduced motion.
-
-```tsx
-<SkeletonGroup label="Loading collection">
-  <Skeleton variant="image" />
-  <Skeleton width="70%" />
-  <Skeleton variant="row" />
-</SkeletonGroup>
-```
 
 ## Customize with CSS Modules
 
