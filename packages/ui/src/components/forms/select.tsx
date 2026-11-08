@@ -37,12 +37,12 @@ interface FieldProps {
   className?: string;
 }
 
-export interface SelectProps
+export interface SelectProps<M extends 'single' | 'multiple' = 'single'>
   extends
-    Omit<AriaSelectProps<SelectOption>, keyof FieldProps | 'children' | 'items'>,
+    Omit<AriaSelectProps<SelectOption, M>, keyof FieldProps | 'children' | 'items'>,
     FieldProps {}
 
-export function Select({
+export function Select<M extends 'single' | 'multiple' = 'single'>({
   label,
   options,
   description,
@@ -51,7 +51,7 @@ export function Select({
   appearance = 'filled',
   className,
   ...props
-}: SelectProps) {
+}: SelectProps<M>) {
   return (
     <AriaSelect
       {...props}
@@ -98,6 +98,15 @@ export interface ComboBoxProps
   extends
     Omit<AriaComboBoxProps<SelectOption>, keyof FieldProps | 'children' | 'items' | 'defaultItems'>,
     FieldProps {}
+
+export type MultiSelectProps = Omit<
+  SelectProps<'multiple'>,
+  'selectionMode' | 'selectedKey' | 'defaultSelectedKey' | 'onSelectionChange'
+>;
+
+export function MultiSelect(props: MultiSelectProps) {
+  return <Select {...props} selectionMode="multiple" />;
+}
 
 export function ComboBox({
   label,

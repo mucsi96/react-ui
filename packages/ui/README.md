@@ -119,6 +119,12 @@ const options = [{ id: 'apple', label: 'Apple' }, { id: 'pear', label: 'Pear' }]
 <Select label="Fruit" options={options} />
 <ComboBox label="Search fruits" options={options} />
 <Checkbox defaultSelected>Subscribe</Checkbox>
+<NumberField label="Daily limit" name="limit" minValue={1} maxValue={100} step={1} isRequired />
+<CheckboxGroup label="Card types" name="types" isRequired>
+  <Checkbox value="vocabulary">Vocabulary</Checkbox>
+  <Checkbox value="grammar">Grammar</Checkbox>
+</CheckboxGroup>
+<MultiSelect label="Fruits" options={options} />
 <RadioGroup label="Size" defaultValue="medium">
   <Radio value="small">Small</Radio>
   <Radio value="medium">Medium</Radio>
@@ -129,6 +135,22 @@ const options = [{ id: 'apple', label: 'Apple' }, { id: 'pear', label: 'Pear' }]
 Labels, descriptions, and validation messages are associated with the input automatically. `TextField`, `Select`, and `ComboBox` accept `error` for application validation. For an externally managed error, use `validationBehavior="aria"` to expose invalid state without waiting for native form submission. Native constraints (`isRequired`, `type`, `minLength`, etc.) also remain available.
 
 Select options have `{ id, label, isDisabled? }`; React Aria handles selection, typeahead, and filtering. Checkbox and switch controlled state uses `isSelected`/`onChange`; radio group state uses `value`/`onChange`. React Aria form `name` props support native form submissions.
+
+`NumberField` uses numeric `value`/`onChange` or `defaultValue`, with `minValue`,
+`maxValue`, `step`, locale-aware `formatOptions`, and increment/decrement buttons.
+An empty field reports `NaN`; validate before persisting rather than substituting
+zero. React Aria commits and clamps typed values on blur. Use `isRequired` to
+prevent empty native form submission. It supports the same `appearance`,
+`description`, `error`, and `validationBehavior` API as the other fields.
+
+`CheckboxGroup` owns a string-array `value`/`onChange` or `defaultValue`; each
+child `Checkbox` supplies a `value`. Group labels, descriptions, required
+validation, and errors are associated automatically. `name` submits each selected
+value as a separate form entry. `MultiSelect` provides the same compact field as
+`Select` with `selectionMode="multiple"` fixed internally. Use its React Aria
+`value`/`onChange` or `defaultValue` array API for selection; options remain open
+while selecting, and Escape returns focus to the trigger. Disabled options cannot
+be selected. Both controls accept `description`, `error`, and `isRequired`.
 
 ### Field and button sizing
 
@@ -217,6 +239,62 @@ For nested actions, compose `SubmenuTrigger` with a `MenuItem` and another `Menu
 
 Dialog focus is trapped while open and restored to the trigger on close. Escape and outside interaction dismiss by default; `isDismissable={false}` disables outside dismissal, and `isKeyboardDismissDisabled` disables Escape. Use `role="alertdialog"` for important confirmations. Dialogs also support controlled `isOpen`/`onOpenChange` without a `DialogTrigger`. Forms and action layouts are composed as ordinary children. Tooltips accept a single pressable child, `content`, optional `placement`, and `delay`.
 
+Use `size="small" | "medium" | "large"` (24, 32, or 48rem; medium by default)
+to size the outer modal, or `maxWidth` for a CSS width override. All sizes are
+constrained to the viewport with safe-area gutters. The optional `footer` node
+or `({ close }) => ReactNode` keeps actions and the title visible while the body
+scrolls, including in a reduced visual viewport. `className` still styles the
+inner dialog. Keep the form in the body and connect footer submit buttons with
+native `form`/`id` attributes:
+
+```tsx
+<Dialog
+  title="Edit source"
+  size="large"
+  footer={({ close }) => (
+    <>
+      <Button variant="text" onPress={close}>
+        Cancel
+      </Button>
+      <Button type="submit" form="source-form">
+        Save
+      </Button>
+    </>
+  )}
+>
+  <form id="source-form" onSubmit={save}>
+    <TextField label="Source name" isRequired />
+  </form>
+</Dialog>
+```
+
+## Tabs and empty states
+
+```tsx
+<Tabs defaultSelectedKey="items">
+  <TabList aria-label="Collection views">
+    <Tab id="items">Items</Tab>
+    <Tab id="summary">Summary</Tab>
+  </TabList>
+  <TabPanel id="items">
+    <EmptyState
+      title="No items yet"
+      description="Create an item to get started."
+      action={<Button onPress={create}>Add item</Button>}
+    />
+  </TabPanel>
+  <TabPanel id="summary">Summary content</TabPanel>
+</Tabs>
+```
+
+Tabs support controlled `selectedKey`/`onSelectionChange`, disabled tabs,
+`orientation="vertical"`, and React Aria's keyboard activation and focus
+behavior. Match tab and panel IDs. Panels unmount by default; use
+`shouldForceMount` on `TabPanel` to preserve state in an inactive, hidden panel.
+`EmptyState` owns no business behavior: supply the title, description, action,
+and optional children. Its heading defaults to level 2; set `headingLevel` to
+match the surrounding document.
+
 ## Notifications
 
 ```tsx
@@ -286,6 +364,20 @@ This is a semantic HTML table. Columns with `compare` have three-state sorting (
 ```
 
 All loading animations respect reduced motion. `Card` supports `outlined` and `elevated`; `Badge` accepts semantic tones and `neutral`. `Heading` supports semantic levels 1–6, `Text` supports `muted`, and `Code` provides inline monospace styling.
+
+Compose stable placeholders with `Skeleton` (`variant="text" | "image" | "row"`,
+optional `width`/`height` CSS values). Each shape is decorative and hidden from
+assistive technology. Wrap a set in `SkeletonGroup label="Loading collection"`
+for one visually hidden status label. Place row placeholders inside table cells,
+not directly inside a `tbody`. Animations stop under reduced motion.
+
+```tsx
+<SkeletonGroup label="Loading collection">
+  <Skeleton variant="image" />
+  <Skeleton width="70%" />
+  <Skeleton variant="row" />
+</SkeletonGroup>
+```
 
 ## Customize with CSS Modules
 

@@ -1,5 +1,5 @@
 import { useId } from 'react';
-import type { ReactNode } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
 import { ModalOverlay, Modal, Dialog as AriaDialog, Heading } from 'react-aria-components';
 import type { ModalOverlayProps } from 'react-aria-components';
 import { Button } from '../button/button';
@@ -15,6 +15,9 @@ export interface DialogProps extends Omit<ModalOverlayProps, 'children' | 'class
   children: ReactNode | ((props: { close: () => void }) => ReactNode);
   role?: 'dialog' | 'alertdialog';
   className?: string;
+  size?: 'small' | 'medium' | 'large';
+  maxWidth?: CSSProperties['maxWidth'];
+  footer?: ReactNode | ((props: { close: () => void }) => ReactNode);
 }
 
 export function Dialog({
@@ -23,17 +26,21 @@ export function Dialog({
   children,
   role = 'dialog',
   className,
+  size = 'medium',
+  maxWidth,
+  footer,
   isDismissable = true,
   ...props
 }: DialogProps) {
   const descriptionId = useId();
   return (
     <ModalOverlay {...props} isDismissable={isDismissable} className={styles.overlay}>
-      <Modal className={styles.modal}>
+      <Modal className={styles.modal} data-size={size} style={{ maxWidth }}>
         <AriaDialog
           role={role}
           aria-describedby={description ? descriptionId : undefined}
           className={classes(styles.dialog, className)}
+          data-layout={footer ? 'fixed-footer' : undefined}
         >
           {({ close }) => (
             <>
@@ -45,12 +52,19 @@ export function Dialog({
                   <Icon name="close" />
                 </Button>
               </header>
-              {description && (
-                <p id={descriptionId} className={styles.description}>
-                  {description}
-                </p>
+              <div className={styles.body}>
+                {description && (
+                  <p id={descriptionId} className={styles.description}>
+                    {description}
+                  </p>
+                )}
+                {typeof children === 'function' ? children({ close }) : children}
+              </div>
+              {footer && (
+                <footer className={styles.footer}>
+                  {typeof footer === 'function' ? footer({ close }) : footer}
+                </footer>
               )}
-              {typeof children === 'function' ? children({ close }) : children}
             </>
           )}
         </AriaDialog>

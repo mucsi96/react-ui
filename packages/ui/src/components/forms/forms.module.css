@@ -79,6 +79,37 @@
 .input {
   resize: vertical;
 }
+.number {
+  display: flex;
+  align-items: center;
+}
+.number .input {
+  min-width: 0;
+}
+.number .floatingLabel {
+  max-width: calc(100% - 7rem);
+}
+.stepper {
+  flex: 0 0 2.5rem;
+  min-height: 2.5rem;
+  border: 0;
+  border-radius: var(--bt-radius);
+  background: transparent;
+  color: var(--bt-text-strong);
+  font: inherit;
+  cursor: pointer;
+}
+.stepper[data-disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.stepper[data-hovered] {
+  background: var(--bt-surface-3);
+}
+.stepper[data-focus-visible] {
+  outline: 2px solid var(--bt-link);
+  outline-offset: -3px;
+}
 .input::placeholder {
   color: var(--bt-text-muted);
 }
@@ -92,12 +123,14 @@
   color: var(--bt-error-soft);
 }
 .description {
+  overflow-wrap: anywhere;
   color: var(--bt-text-muted);
   font-size: 0.75rem;
   line-height: 1.25rem;
   padding-inline: 1rem;
 }
 .error {
+  overflow-wrap: anywhere;
   color: var(--bt-error-soft);
   font-size: 0.75rem;
   line-height: 1.25rem;
