@@ -1,6 +1,8 @@
 .overlay {
   position: fixed;
   inset: 0;
+  box-sizing: border-box;
+  height: var(--visual-viewport-height, 100dvh);
   z-index: 100;
   display: grid;
   place-items: center;

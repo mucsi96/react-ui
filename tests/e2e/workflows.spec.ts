@@ -82,3 +82,23 @@ test('long dialog keeps actions visible in a short mobile viewport and submits i
     'Collection saved',
   );
 });
+
+test('dialog actions stay within a keyboard-reduced visual viewport', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('#/workflows');
+  await page.getByRole('button', { name: 'Edit collection', exact: true }).click();
+  await page.evaluate(() => {
+    Object.defineProperty(window.visualViewport, 'height', { configurable: true, value: 400 });
+    window.visualViewport!.dispatchEvent(new Event('resize'));
+  });
+  const save = page.getByRole('button', { name: 'Save collection' });
+  await expect
+    .poll(async () => {
+      const bounds = await save.boundingBox();
+      return bounds!.y + bounds!.height;
+    })
+    .toBeLessThanOrEqual(400);
+  await page.getByRole('textbox', { name: 'Note 12', exact: true }).fill('Keyboard remains open');
+  const bounds = await save.boundingBox();
+  expect(bounds!.y + bounds!.height).toBeLessThanOrEqual(400);
+});
