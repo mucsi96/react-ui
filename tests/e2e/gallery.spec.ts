@@ -8,6 +8,7 @@ const pages = [
   ['/', 'A clear foundation.'],
   ['/buttons', 'Buttons'],
   ['/inputs', 'Inputs'],
+  ['/workflows', 'Workflow primitives'],
   ['/menus', 'Menus'],
   ['/dialogs', 'Dialogs'],
   ['/table', 'Data table'],

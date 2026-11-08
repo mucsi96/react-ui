@@ -1,0 +1,20 @@
+.empty {
+  display: grid;
+  justify-items: center;
+  gap: 1rem;
+  padding: 2rem 1rem;
+  text-align: center;
+  overflow-wrap: anywhere;
+  font: 1rem / 1.5 var(--bt-font);
+  color: var(--bt-text-default);
+}
+.description {
+  color: var(--bt-text-muted);
+  max-width: 40rem;
+}
+.action {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+}

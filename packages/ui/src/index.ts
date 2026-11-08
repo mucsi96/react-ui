@@ -8,11 +8,19 @@ export { Button, LinkButton } from './components/button/button';
 export type { ButtonProps, ButtonVariant, LinkButtonProps } from './components/button/button';
 export { TextField } from './components/forms/text-field';
 export type { TextFieldProps } from './components/forms/text-field';
-export { Select, ComboBox } from './components/forms/select';
-export type { SelectProps, ComboBoxProps, SelectOption } from './components/forms/select';
-export { Checkbox, Radio, RadioGroup, Switch } from './components/forms/controls';
+export { NumberField } from './components/forms/number-field';
+export type { NumberFieldProps } from './components/forms/number-field';
+export { Select, MultiSelect, ComboBox } from './components/forms/select';
+export type {
+  SelectProps,
+  MultiSelectProps,
+  ComboBoxProps,
+  SelectOption,
+} from './components/forms/select';
+export { Checkbox, CheckboxGroup, Radio, RadioGroup, Switch } from './components/forms/controls';
 export type {
   CheckboxProps,
+  CheckboxGroupProps,
   RadioProps,
   RadioGroupProps,
   SwitchProps,
@@ -53,3 +61,9 @@ export type { BarLoaderProps, ProgressBarProps } from './components/loader/loade
 export { Card, Badge, Heading, Text, Code, Divider } from './components/surface/surface';
 export type { CardProps, BadgeProps, HeadingProps, TextProps } from './components/surface/surface';
 export type { Tone } from './types';
+export { Tabs, TabList, Tab, TabPanel } from './components/tabs/tabs';
+export type { TabsProps, TabListProps, TabProps, TabPanelProps } from './components/tabs/tabs';
+export { Skeleton, SkeletonGroup } from './components/skeleton/skeleton';
+export type { SkeletonProps, SkeletonGroupProps } from './components/skeleton/skeleton';
+export { EmptyState } from './components/empty-state/empty-state';
+export type { EmptyStateProps } from './components/empty-state/empty-state';

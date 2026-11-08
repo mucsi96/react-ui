@@ -1,0 +1,60 @@
+.tabs {
+  min-width: 0;
+  font: 1rem / 1.5 var(--bt-font);
+  color: var(--bt-text-default);
+}
+.list {
+  display: flex;
+  overflow-x: auto;
+  border-bottom: 1px solid var(--bt-outline);
+}
+.tab {
+  flex-shrink: 0;
+  padding: 0.75rem 1rem;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  outline: none;
+}
+.tab[data-selected] {
+  color: var(--bt-link-hint);
+  border-color: var(--bt-link);
+}
+.tab[data-hovered] {
+  background: var(--bt-surface-2);
+}
+.tab[data-disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.tab[data-focus-visible],
+.panel[data-focus-visible] {
+  outline: 2px solid var(--bt-link);
+  outline-offset: -2px;
+}
+.panel {
+  padding-block: 1rem;
+  outline: none;
+  min-width: 0;
+}
+.panel[data-inert] {
+  display: none;
+}
+.tabs[data-orientation='vertical'] {
+  display: flex;
+  gap: 1rem;
+}
+.tabs[data-orientation='vertical'] .list {
+  flex-direction: column;
+  border-bottom: 0;
+  border-inline-end: 1px solid var(--bt-outline);
+}
+.tabs[data-orientation='vertical'] .tab {
+  border-bottom: 0;
+  border-inline-end: 2px solid transparent;
+}
+.tabs[data-orientation='vertical'] .tab[data-selected] {
+  border-color: var(--bt-link);
+}
+.tabs[data-orientation='vertical'] .panel {
+  flex: 1;
+}

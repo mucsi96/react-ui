@@ -9,6 +9,11 @@ const pages = [
   { path: '/', label: 'Overview', component: lazy(() => import('./pages/overview')) },
   { path: '/buttons', label: 'Buttons', component: lazy(() => import('./pages/buttons')) },
   { path: '/inputs', label: 'Inputs', component: lazy(() => import('./pages/inputs')) },
+  {
+    path: '/workflows',
+    label: 'Workflow primitives',
+    component: lazy(() => import('./pages/workflows')),
+  },
   { path: '/menus', label: 'Menus', component: lazy(() => import('./pages/menus')) },
   { path: '/dialogs', label: 'Dialogs', component: lazy(() => import('./pages/dialogs')) },
   { path: '/table', label: 'Data table', component: lazy(() => import('./pages/table')) },

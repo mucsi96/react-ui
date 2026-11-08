@@ -19,14 +19,15 @@ All direct dependencies were installed from npm's latest stable versions. Exact 
 
 ## Components
 
-| Category          | Components                                                                                                     |
-| ----------------- | -------------------------------------------------------------------------------------------------------------- |
-| Actions           | `Button`, `LinkButton`, `SplitButton`, `Tooltip`                                                               |
-| Inputs            | `TextField`, `Select`, `ComboBox`, `Checkbox`, `RadioGroup`, `Radio`, `Switch`, `DonutSlider`                  |
-| Overlays          | `MenuTrigger`, `MenuPopover`, `Menu`, `MenuItem`, `MenuSeparator`, `SubmenuTrigger`, `DialogTrigger`, `Dialog` |
-| Data              | `DataTable` with typed columns, sorting, pagination, and controlled selection                                  |
-| Feedback          | `Alert`, `NotificationsProvider`, `useNotifications`, `BarLoader`, `Spinner`, `ProgressBar`                    |
-| Surfaces and type | `Card`, `Badge`, `Heading`, `Text`, `Code`, `Divider`                                                          |
+| Category          | Components                                                                                                                                   |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| Actions           | `Button`, `LinkButton`, `SplitButton`, `Tooltip`                                                                                             |
+| Inputs            | `TextField`, `NumberField`, `Select`, `MultiSelect`, `ComboBox`, `CheckboxGroup`, `Checkbox`, `RadioGroup`, `Radio`, `Switch`, `DonutSlider` |
+| Overlays          | `MenuTrigger`, `MenuPopover`, `Menu`, `MenuItem`, `MenuSeparator`, `SubmenuTrigger`, `DialogTrigger`, `Dialog`                               |
+| Data              | `DataTable` with typed columns, sorting, pagination, and controlled selection                                                                |
+| Feedback          | `Alert`, `NotificationsProvider`, `useNotifications`, `BarLoader`, `Spinner`, `ProgressBar`, `Skeleton`, `SkeletonGroup`, `EmptyState`       |
+| Navigation        | `Tabs`, `TabList`, `Tab`, `TabPanel`                                                                                                         |
+| Surfaces and type | `Card`, `Badge`, `Heading`, `Text`, `Code`, `Divider`                                                                                        |
 
 The library provides shared design tokens, dark surfaces, semantic button colors, a five-bar loader, split actions, and a multi-turn rotary input for React applications.
 

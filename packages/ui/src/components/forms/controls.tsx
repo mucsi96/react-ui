@@ -1,5 +1,8 @@
 import {
   Checkbox as AriaCheckbox,
+  CheckboxGroup as AriaCheckboxGroup,
+  FieldError,
+  Text,
   RadioGroup as AriaRadioGroup,
   Radio as AriaRadio,
   Switch as AriaSwitch,
@@ -7,6 +10,7 @@ import {
 } from 'react-aria-components';
 import type {
   CheckboxProps as AriaCheckboxProps,
+  CheckboxGroupProps as AriaCheckboxGroupProps,
   RadioGroupProps as AriaRadioGroupProps,
   RadioProps as AriaRadioProps,
   SwitchProps as AriaSwitchProps,
@@ -42,6 +46,43 @@ export function Checkbox({ children, className, ...props }: CheckboxProps) {
         </>
       )}
     </AriaCheckbox>
+  );
+}
+
+export interface CheckboxGroupProps extends Omit<AriaCheckboxGroupProps, 'children' | 'className'> {
+  label: string;
+  children: ReactNode;
+  description?: ReactNode;
+  error?: ReactNode;
+  className?: string;
+}
+
+export function CheckboxGroup({
+  label,
+  children,
+  description,
+  error,
+  className,
+  ...props
+}: CheckboxGroupProps) {
+  return (
+    <AriaCheckboxGroup
+      {...props}
+      isInvalid={!!error || props.isInvalid}
+      className={classes(styles.field, className)}
+    >
+      <Label className={styles.label}>
+        {label}
+        {props.isRequired && <span aria-hidden="true"> *</span>}
+      </Label>
+      {children}
+      {description && (
+        <Text slot="description" className={styles.description}>
+          {description}
+        </Text>
+      )}
+      <FieldError className={styles.error}>{error}</FieldError>
+    </AriaCheckboxGroup>
   );
 }
 
