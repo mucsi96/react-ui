@@ -355,7 +355,8 @@ Replace a `SkeletonGroup` and its placeholders, or an individually positioned
 loader, with `<LoadingArea label="Loading collection" />`. Render the loaded
 content in its place when ready. The required `label` names one indeterminate
 `BarLoader`; no visible loading text or extra live region is added. Reduced-motion
-preferences are preserved. Existing skeleton APIs remain available.
+preferences are preserved. `Skeleton`, `SkeletonGroup`, and their prop types have
+been removed; migrate existing imports and placeholder groups to `LoadingArea`.
 
 The default compact area has an `8rem` minimum block size and `1rem` padding.
 Use `className`, `style`, and native div props (including `ref`) to customize its
@@ -415,20 +416,6 @@ adding redundant visible “Loading…” text.
 ```
 
 All loading animations respect reduced motion. `Card` supports `outlined` and `elevated`; `Badge` accepts semantic tones and `neutral`. `Heading` supports semantic levels 1–6, `Text` supports `muted`, and `Code` provides inline monospace styling.
-
-Compose stable placeholders with `Skeleton` (`variant="text" | "image" | "row"`,
-optional `width`/`height` CSS values). Each shape is decorative and hidden from
-assistive technology. Wrap a set in `SkeletonGroup label="Loading collection"`
-for one visually hidden status label. Place row placeholders inside table cells,
-not directly inside a `tbody`. Animations stop under reduced motion.
-
-```tsx
-<SkeletonGroup label="Loading collection">
-  <Skeleton variant="image" />
-  <Skeleton width="70%" />
-  <Skeleton variant="row" />
-</SkeletonGroup>
-```
 
 ## Customize with CSS Modules
 

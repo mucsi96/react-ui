@@ -65,7 +65,5 @@ export type { CardProps, BadgeProps, HeadingProps, TextProps } from './component
 export type { Tone } from './types';
 export { Tabs, TabList, Tab, TabPanel } from './components/tabs/tabs';
 export type { TabsProps, TabListProps, TabProps, TabPanelProps } from './components/tabs/tabs';
-export { Skeleton, SkeletonGroup } from './components/skeleton/skeleton';
-export type { SkeletonProps, SkeletonGroupProps } from './components/skeleton/skeleton';
 export { EmptyState } from './components/empty-state/empty-state';
 export type { EmptyStateProps } from './components/empty-state/empty-state';

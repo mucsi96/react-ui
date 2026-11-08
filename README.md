@@ -25,7 +25,7 @@ All direct dependencies were installed from npm's latest stable versions. Exact 
 | Inputs            | `TextField`, `NumberField`, `Select`, `MultiSelect`, `ComboBox`, `CheckboxGroup`, `Checkbox`, `RadioGroup`, `Radio`, `Switch`, `DonutSlider` |
 | Overlays          | `MenuTrigger`, `MenuPopover`, `Menu`, `MenuItem`, `MenuSeparator`, `SubmenuTrigger`, `DialogTrigger`, `Dialog`                               |
 | Data              | `DataTable` with typed columns, sorting, pagination, and controlled selection                                                                |
-| Feedback          | `Alert`, `NotificationsProvider`, `useNotifications`, `BarLoader`, `Spinner`, `ProgressBar`, `Skeleton`, `SkeletonGroup`, `EmptyState`       |
+| Feedback          | `Alert`, `NotificationsProvider`, `useNotifications`, `BarLoader`, `Spinner`, `ProgressBar`, `LoadingArea`, `EmptyState`                     |
 | Navigation        | `Tabs`, `TabList`, `Tab`, `TabPanel`                                                                                                         |
 | Surfaces and type | `Card`, `Badge`, `Heading`, `Text`, `Code`, `Divider`                                                                                        |
 

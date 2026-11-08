@@ -8,8 +8,7 @@ import {
   EmptyState,
   MultiSelect,
   NumberField,
-  Skeleton,
-  SkeletonGroup,
+  LoadingArea,
   Tab,
   TabList,
   TabPanel,
@@ -149,21 +148,8 @@ export default function WorkflowsPage() {
           <TabPanel id="summary">Your collection summary appears here.</TabPanel>
         </Tabs>
       </Demo>
-      <Demo
-        title="Skeleton placeholders"
-        stack
-        code={`<SkeletonGroup label="Loading collection">
-  <Skeleton variant="image" />
-  <Skeleton width="70%" />
-  <Skeleton variant="row" />
-</SkeletonGroup>`}
-      >
-        <SkeletonGroup label="Loading collection">
-          <Skeleton variant="image" />
-          <Skeleton width="70%" />
-          <Skeleton />
-          <Skeleton variant="row" />
-        </SkeletonGroup>
+      <Demo title="Collection loading" stack code={`<LoadingArea label="Loading collection" />`}>
+        <LoadingArea label="Loading collection" />
       </Demo>
     </>
   );
