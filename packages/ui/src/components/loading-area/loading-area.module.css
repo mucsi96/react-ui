@@ -1,0 +1,13 @@
+.area {
+  display: grid;
+  place-items: center;
+  box-sizing: border-box;
+  min-inline-size: 0;
+  min-block-size: 8rem;
+  padding: 1rem;
+}
+
+.fill {
+  flex: 1;
+  align-self: stretch;
+}

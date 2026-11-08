@@ -31,6 +31,10 @@ All direct dependencies were installed from npm's latest stable versions. Exact 
 
 The library provides shared design tokens, dark surfaces, semantic button colors, a five-bar loader, split actions, and a multi-turn rotary input for React applications.
 
+Use `LoadingArea` to replace skeleton placeholders with one accessible, locally
+centered loader in pages, sections, and dialogs. See the [sizing and adoption guide](packages/ui/README.md#centered-loading-areas)
+and the gallery's Loaders examples for compact and fill-available-space layouts.
+
 ## Develop
 
 Use Node.js 24 LTS (the checked-in `.node-version` records the verified version).
