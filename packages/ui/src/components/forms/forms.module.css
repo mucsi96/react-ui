@@ -57,6 +57,31 @@
 .field[data-appearance='outlined'] .surface:focus-within .floatingLabel {
   color: var(--bt-link);
 }
+.selectSurface {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+.selectSurface > .floatingLabel {
+  position: relative;
+  grid-area: 1 / 1;
+  align-self: start;
+  justify-self: start;
+  margin-inline-end: 32px;
+  max-width: calc(100% - 32px);
+}
+.selectSurface > .selectButton {
+  grid-area: 1 / 1;
+  min-width: 0;
+}
+.selectValue {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.selectButton > svg {
+  flex-shrink: 0;
+}
 .input,
 .selectButton {
   box-sizing: border-box;
@@ -212,6 +237,7 @@
   cursor: not-allowed;
 }
 .control {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 0.875rem;
